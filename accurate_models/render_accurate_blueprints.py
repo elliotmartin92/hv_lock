@@ -233,26 +233,36 @@ def render_mated_blueprint():
     print("Rendering mated_assembly_blueprint.png...")
     mated = trimesh.load(os.path.join(target_dir, "mated_assembly.obj"))
     
+def render_mated_blueprint():
+    print("Rendering mated_assembly_blueprint.png (3-Part System)...")
+    h_mesh = trimesh.load(os.path.join(target_dir, "mated_outer_housing.stl"))
+    b_mesh = trimesh.load(os.path.join(target_dir, "mated_outlet_box.stl"))
+    c_mesh = trimesh.load(os.path.join(target_dir, "mated_connector.stl"))
+    
     fig = plt.figure(figsize=(24, 15), dpi=160)
     plt.subplots_adjust(left=0.03, right=0.97, top=0.88, bottom=0.04, wspace=0.10, hspace=0.18)
     fig.patch.set_facecolor('#070d19')
     
-    fig.suptitle("V2L CONNECTOR & OUTLET BOX MATED ASSEMBLY\nAccurate Geometric Engagement & Mechanical Clearances",
+    fig.suptitle("KIA EV6 / E-GMP 95190-CV780 V2L COMPLETE 3-PART MATED ASSEMBLY\nOuter Housing Bezel + AC Outlet Box + Orange HV Connector",
                  color='white', fontsize=17, weight='bold', y=0.96)
     
-    # PANEL 1: Front Elevation Mated View
+    # PANEL 1: Front Elevation Mated View (Cabin Perspective)
     ax1 = fig.add_subplot(2, 2, 1, projection='3d')
-    plot_mesh(ax1, mated, edge_color='#475569')
-    setup_ax_3d(ax1, "PANEL 1: Front Elevation Mated View",
-                xlim=[-5, 128], ylim=[-55, 10], zlim=[-125, 48], elev=0, azim=-90)
+    plot_mesh(ax1, h_mesh, color='#334155', edge_color='#1e293b')
+    plot_mesh(ax1, b_mesh, color='#475569', edge_color='#0f172a')
+    plot_mesh(ax1, c_mesh, color='#ea580c', edge_color='#7c2d12')
+    setup_ax_3d(ax1, "PANEL 1: Front Elevation Mated View (Cabin Perspective)",
+                xlim=[-85, 85], ylim=[-75, 15], zlim=[-10, 110], elev=0, azim=90)
     
     txt1 = (
-        "CONFIRMED MATED CLEARANCES:\n"
-        "• [GAP] Seated Gap: 4.70 mm (confirmed by user)\n"
-        "• Collar Insertion Depth: 17.67 mm\n"
-        "• Latch Tooth Engaged & Covered (Inside Shroud!)\n"
-        "• Forward-Facing Latch Tower under Box Relief Notch\n"
-        "• 4.00 mm Clearance to Silver Stamped Bracket"
+        "CONFIRMED FRONT INTERFACE:\n"
+        "• [H1] Total Outer Width: 142.30 mm\n"
+        "• [H2] Total Outer Height: 95.40 mm (100% Smooth Arch)\n"
+        "• [H3] Window Aperture: 114.60 mm x 50.20 mm [H4]\n"
+        "• Outlet Box Seated Centered with 1.42 mm Side Gap\n"
+        "• Left: Spring Flap Door ('Max AC 120V, 16A')\n"
+        "• Right: Circular NEMA 5-15R 120V AC Outlet\n"
+        "• Lower Chin Protrusion: 27.10 mm Below Plate"
     )
     ax1.text2D(0.03, 0.95, txt1, transform=ax1.transAxes, color='#38bdf8', fontsize=9.5,
                va='top', linespacing=1.35,
@@ -260,63 +270,62 @@ def render_mated_blueprint():
 
     # PANEL 2: Left Side Elevation Mated View
     ax2 = fig.add_subplot(2, 2, 2, projection='3d')
-    plot_mesh(ax2, mated, edge_color='#475569')
-    setup_ax_3d(ax2, "PANEL 2: Left Side Elevation (Depth Profile & Seating)",
-                xlim=[-5, 128], ylim=[-65, 10], zlim=[-125, 48], elev=0, azim=180)
+    plot_mesh(ax2, h_mesh, color='#334155', edge_color='#1e293b')
+    plot_mesh(ax2, b_mesh, color='#475569', edge_color='#0f172a')
+    plot_mesh(ax2, c_mesh, color='#ea580c', edge_color='#7c2d12')
+    setup_ax_3d(ax2, "PANEL 2: Side Elevation Mated View (Depth & Seating)",
+                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=0, azim=0)
     
     txt2 = (
-        "SIDE DEPTH ALIGNMENT:\n"
-        "• Front Flush Alignment (Latch Tower to Box Front)\n"
-        "• 12.45 mm Rear Lid Overhang Shelf\n"
-        "• Box Depth: 48.15 mm\n"
-        "• 3 Vertical Side Wall Grooves Clear\n"
-        "• Plug Shoulder Seated at -4.70 mm"
+        "SIDE DEPTH & CLEARANCES:\n"
+        "• [H7a] Side Wall Depth: 58.80 mm (Gentle 5.6° Wing Slope)\n"
+        "• Wings Flush Under Curved Roof Arch (Never Extend Above)\n"
+        "• Aluminum Plate: 6.90 mm Below Window Aperture\n"
+        "• Internal Bend Angle: 84.13° (5.87° Upward Pitch)\n"
+        "• Connector Plugs into Rear Collar at Z = 44.65 mm\n"
+        "• Verified Seated Gap: 4.70 mm\n"
+        "• Heavy-Gauge Cable Extends Rearward into Dash Cavity"
     )
     ax2.text2D(0.03, 0.95, txt2, transform=ax2.transAxes, color='#38bdf8', fontsize=9.5,
                va='top', linespacing=1.35,
                bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
 
-    # PANEL 3: 2D Longitudinal Cutaway Section
-    ax3 = fig.add_subplot(2, 2, 3)
-    ax3.set_facecolor('#0b1329')
-    ax3.set_title("PANEL 3: Longitudinal Cross-Section of Mated Interface", color='white', fontsize=12.5, weight='bold', pad=12)
+    # PANEL 3: Top Plan Mated View
+    ax3 = fig.add_subplot(2, 2, 3, projection='3d')
+    plot_mesh(ax3, h_mesh, color='#334155', edge_color='#1e293b')
+    plot_mesh(ax3, b_mesh, color='#475569', edge_color='#0f172a')
+    plot_mesh(ax3, c_mesh, color='#ea580c', edge_color='#7c2d12')
+    setup_ax_3d(ax3, "PANEL 3: Top Plan Mated View (Wings & Floor Plate Span)",
+                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=90, azim=-90)
     
-    # 2D cross-section schematic
-    # Box body at Z = 0 to 42.67
-    ax3.fill([-25, 45, 45, -25, -25], [0, 0, 42.67, 42.67, 0], color='#334155', alpha=0.95, label='Outlet Box Body')
-    # Lid with 12.45mm rear overhang
-    ax3.fill([-37.45, 45, 45, -37.45, -37.45], [38.09, 38.09, 42.67, 42.67, 38.09], color='#1e293b', alpha=0.95, label='Lid (12.45mm Overhang)')
-    # Collar protruding down to -22.37mm
-    ax3.fill([-11.35, 11.35, 11.35, -11.35, -11.35], [-22.37, -22.37, 0, 0, -22.37], color='#0f172a', edgecolor='#94a3b8', lw=2.0, label='Receptacle Collar')
-    # Latch tooth at Z = -13.64mm
-    ax3.fill([11.35, 14.05, 14.05, 11.35, 11.35], [-15.0, -15.0, -12.3, -12.3, -15.0], color='#ef4444', label='Covered Latch Tooth')
-    # Orange connector shroud (rim at -4.70mm, body down to -59.30mm)
-    ax3.plot([12.55, 12.55, 15.5, 15.5, -12.55, -12.55], [-4.70, -32.0, -32.0, -59.3, -59.3, -4.70], color='#ea580c', lw=3.0, label='Orange Connector Shroud')
-    # Latch tower with foam tape
-    ax3.plot([12.55, 22.0, 22.0, 15.5], [-4.70, -4.70, -41.45, -41.45], color='#f97316', lw=2.5, label='Latch Tower & Foam Wrap')
-    
-    # Dimension lines on 2D section
-    draw_dim_arrow(ax3, (16.0, 0), (16.0, -4.70), "4.70 mm Seated Gap", offset=(8.0, 0), color='#38bdf8')
-    draw_dim_arrow(ax3, (-14.0, 0), (-14.0, -22.37), "22.37 mm Collar", offset=(-10.0, 0), color='#facc15')
-    draw_dim_arrow(ax3, (-28.0, -4.70), (-28.0, -22.37), "17.67 mm Engagement", offset=(-8.0, 0), color='#4ade80')
-    draw_dim_arrow(ax3, (-37.45, 45.0), (-25.0, 45.0), "12.45 mm Overhang", offset=(0, 2.5), color='#f43f5e')
-    
-    ax3.set_xlim(-55, 55)
-    ax3.set_ylim(-70, 55)
-    ax3.set_aspect('equal')
-    ax3.axis('off')
-    ax3.legend(loc='lower left', facecolor='#070d19', edgecolor='#334155', labelcolor='white', fontsize=8.5)
+    txt3 = (
+        "HORIZONTAL CLEARANCES:\n"
+        "• [H11] Inner Wing Clear Span: 140.50 mm\n"
+        "• Aluminum Floor Plate Width: 120.20 mm\n"
+        "• [H11b] Space Between Wing & Aluminum: 10.15 mm\n"
+        "• Aluminum Floor Holes: 7.45x6.45 Oval + Ø 6.45 Round\n"
+        "• Central Hole 7.60 mm from Back, Oval 7.30 mm from Back\n"
+        "• Connector Placed on Left Flank (Clear of Chassis Bolt)"
+    )
+    ax3.text2D(0.03, 0.95, txt3, transform=ax3.transAxes, color='#38bdf8', fontsize=9.5,
+               va='top', linespacing=1.35,
+               bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
 
     # PANEL 4: 3D Isometric View
     ax4 = fig.add_subplot(2, 2, 4, projection='3d')
-    plot_mesh(ax4, mated, edge_color='#475569')
+    plot_mesh(ax4, h_mesh, color='#334155', edge_color='#1e293b')
+    plot_mesh(ax4, b_mesh, color='#475569', edge_color='#0f172a')
+    plot_mesh(ax4, c_mesh, color='#ea580c', edge_color='#7c2d12')
     setup_ax_3d(ax4, "PANEL 4: 3D Isometric Mated Perspective",
-                xlim=[-10, 130], ylim=[-68, 10], zlim=[-125, 52], elev=28, azim=-55)
+                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=25, azim=-55)
     
-    for b_dir in [target_dir, artifact_dir]:
+    art_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\ca2c4a5c-394a-4c0b-b99d-8dde76573538"
+    os.makedirs(art_dir, exist_ok=True)
+    for b_dir in [target_dir, art_dir]:
         plt.savefig(os.path.join(b_dir, "mated_assembly_blueprint.png"), facecolor=fig.get_facecolor(), bbox_inches='tight')
     plt.close()
     print("Saved mated_assembly_blueprint.png")
+
 
 if __name__ == '__main__':
     render_connector_blueprint()
