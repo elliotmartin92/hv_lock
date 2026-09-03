@@ -1,0 +1,281 @@
+{
+  "system_name": "Kia EV6 / Hyundai E-GMP 95190-CV780 V2L Complete 3-Part Mated Assembly",
+  "datum_reference_frame": {
+    "X_axis": "Width (+X Passenger / Right, -X Driver / Left, Center = 0.0 mm)",
+    "Y_axis": "Depth (+Y Forward / Cabin Side, -Y Rearward / Interior Dash Cavity, Front Bezel Face = 0.0 mm)",
+    "Z_axis": "Height (Bottom of Chin = 0.0 mm, Top Roof Arch Rim = 95.40 mm)"
+  },
+  "subsystems": {
+    "outer_housing_bezel": {
+      "outer_dimensions_mm": {
+        "width_X": 142.3,
+        "height_Z": 95.4,
+        "depth_Y": 58.8
+      },
+      "window_aperture_mm": {
+        "width_X": 114.6,
+        "height_Z": 50.2,
+        "Z_bounds": [
+          34.0,
+          84.2
+        ],
+        "center_Z": 59.1
+      },
+      "lower_chin_mm": {
+        "front_height": 30.77,
+        "total_depth_with_ribs": 7.1,
+        "extension_below_aluminum_plate": 27.1
+      },
+      "side_wings_mm": {
+        "inner_span": 140.5,
+        "wall_thickness": 2.6,
+        "front_Z": 88.5,
+        "rear_Z": 83.5,
+        "slope_deg": 5.6
+      }
+    },
+    "stamped_aluminum_plate": {
+      "dimensions_mm": {
+        "width_X": 120.2,
+        "rear_extension_Y": 53.0,
+        "thickness": 1.5
+      },
+      "clearance_to_wings_mm": 10.15,
+      "root_bend_mm": {
+        "Y": -5.6,
+        "Z": 27.1
+      },
+      "bend_angles": {
+        "internal_bend_deg": 84.13,
+        "upward_pitch_deg": 5.87
+      },
+      "vertical_distance_below_window_mm": 6.9,
+      "mounting_holes": {
+        "outer_oval_slot_mm": {
+          "width_X": 7.45,
+          "height_Y": 6.45,
+          "distance_from_side": 16.75,
+          "distance_from_back": 7.3
+        },
+        "central_round_hole_mm": {
+          "diameter": 6.45,
+          "distance_from_back": 7.6
+        },
+        "center_to_center_spacing_mm": 44.9,
+        "edge_to_edge_spacing_mm": 37.95
+      }
+    },
+    "outlet_box_module": {
+      "seating_position": {
+        "X_bounds": [
+          -55.875,
+          55.875
+        ],
+        "Y_bounds": [
+          -36.21,
+          -3.0
+        ],
+        "Z_bounds": [
+          36.2,
+          82.2
+        ],
+        "depth_mm": 33.21,
+        "height_mm": 46.0,
+        "width_mm": 111.75
+      },
+      "assembly_clearances": {
+        "H17a_back_of_box_to_plate_back_clearance_mm": 16.79,
+        "H17b_box_vertical_gap_off_plate_mm": 9.1,
+        "chassis_bolt_holes_status": "Completely unobstructed (3.04mm clearance ahead of holes)"
+      },
+      "faceplate_features": {
+        "left_side": "Hinged spring flap door ('Max AC 120V, 16A') at X = +27.0 mm (cabin view left)",
+        "right_side": "Circular NEMA 5-15R 120V AC 3-prong outlet socket at X = -27.0 mm (cabin view right)"
+      },
+      "receptacle_collar": {
+        "position_X_mm": 27.0,
+        "protrusion_along_minus_Y_mm": 22.37,
+        "collar_bounds_Y": [
+          -58.58,
+          -36.21
+        ],
+        "dimensions_mm": {
+          "width_X": 22.7,
+          "height_Z": 33.05
+        }
+      }
+    },
+    "orange_hv_connector": {
+      "seated_position": {
+        "X_center_mm": 27.0,
+        "shroud_front_rim_Y_mm": -40.91,
+        "seated_gap_to_box_back_mm": 4.7,
+        "collar_penetration_mm": 17.67,
+        "rigid_length_mm": 54.6,
+        "total_length_with_cable_mm": 125.0
+      }
+    }
+  },
+  "caliper_measurements_reference": {
+    "[H1]": {
+      "description": "Total Outer Frame Width",
+      "value": "142.30",
+      "tolerance": "\u00b10.20"
+    },
+    "[H2]": {
+      "description": "Total Outer Frame Height",
+      "value": "95.40",
+      "tolerance": "\u00b10.20"
+    },
+    "[H3]": {
+      "description": "Window Aperture Width",
+      "value": "114.60",
+      "tolerance": "\u00b10.15"
+    },
+    "[H4]": {
+      "description": "Window Aperture Height",
+      "value": "50.20",
+      "tolerance": "\u00b10.15"
+    },
+    "[H5]": {
+      "description": "Lower Chin Front Height",
+      "value": "30.77",
+      "tolerance": "\u00b10.20"
+    },
+    "[H5b]": {
+      "description": "Chin Total Depth (w/ ribs)",
+      "value": "7.10",
+      "tolerance": "\u00b10.15"
+    },
+    "[H6]": {
+      "description": "Top Bezel Thickness",
+      "value": "11.20",
+      "tolerance": "\u00b10.15"
+    },
+    "[H7a]": {
+      "description": "Side Wing Total Depth",
+      "value": "58.80",
+      "tolerance": "\u00b10.25"
+    },
+    "[H9]": {
+      "description": "Top Shelf Flat Length",
+      "value": "34.00",
+      "tolerance": "\u00b10.30"
+    },
+    "[H10]": {
+      "description": "Aluminum Rear Extension",
+      "value": "53.00",
+      "tolerance": "\u00b10.25"
+    },
+    "[H11]": {
+      "description": "Inner Wing Clear Span",
+      "value": "140.50",
+      "tolerance": "\u00b10.20"
+    },
+    "[H11b]": {
+      "description": "Wing-to-Aluminum Air Gap",
+      "value": "10.15",
+      "tolerance": "\u00b10.15"
+    },
+    "[H12]": {
+      "description": "Aluminum Plate Width",
+      "value": "120.20",
+      "tolerance": "\u00b10.20"
+    },
+    "[H13]": {
+      "description": "Side Wing Wall Thickness",
+      "value": "2.60",
+      "tolerance": "\u00b10.10"
+    },
+    "[H14]": {
+      "description": "Window Recess Step Depth",
+      "value": "3.00",
+      "tolerance": "\u00b10.15"
+    },
+    "[H15b]": {
+      "description": "Outer Oval Slot Dimensions",
+      "value": "7.45 x 6.45",
+      "tolerance": "\u00b10.10"
+    },
+    "[H15d]": {
+      "description": "Central Hole Diameter",
+      "value": "\u00d8 6.45",
+      "tolerance": "\u00b10.10"
+    },
+    "[H15e]": {
+      "description": "Holes Center-to-Center",
+      "value": "44.90",
+      "tolerance": "\u00b10.15"
+    },
+    "[H15f]": {
+      "description": "Central Hole Back Edge",
+      "value": "7.60",
+      "tolerance": "\u00b10.15"
+    },
+    "[H15g]": {
+      "description": "Oval Slot Back Edge",
+      "value": "7.30",
+      "tolerance": "\u00b10.15"
+    },
+    "[H16b]": {
+      "description": "Internal Bend Angle",
+      "value": "84.13\u00b0",
+      "tolerance": "\u00b10.25\u00b0"
+    },
+    "[H16c]": {
+      "description": "Upward Pitch Angle",
+      "value": "5.87\u00b0",
+      "tolerance": "\u00b10.25\u00b0"
+    },
+    "[H16f]": {
+      "description": "Chin below Aluminum Plate",
+      "value": "27.10",
+      "tolerance": "\u00b10.20"
+    },
+    "[H16g]": {
+      "description": "Plate below Window Aperture",
+      "value": "6.90",
+      "tolerance": "\u00b10.15"
+    },
+    "[H17a]": {
+      "description": "Box to Plate Back Clearance",
+      "value": "16.79",
+      "tolerance": "\u00b10.15"
+    },
+    "[H17b]": {
+      "description": "Box Vertical Gap off Plate",
+      "value": "9.10",
+      "tolerance": "\u00b10.20"
+    },
+    "[A1]": {
+      "description": "Plug Shroud Outer Width",
+      "value": "36.10",
+      "tolerance": "\u00b10.15"
+    },
+    "[A4]": {
+      "description": "Total Plug Height",
+      "value": "37.11",
+      "tolerance": "\u00b10.15"
+    },
+    "[B1]": {
+      "description": "Tower Axial Length",
+      "value": "36.75",
+      "tolerance": "\u00b10.20"
+    },
+    "[B7]": {
+      "description": "Rigid Housing Length",
+      "value": "54.60",
+      "tolerance": "\u00b10.25"
+    },
+    "[C1]": {
+      "description": "Collar Protrusion Length",
+      "value": "22.37",
+      "tolerance": "\u00b10.15"
+    },
+    "[GAP]": {
+      "description": "Confirmed Seated Gap",
+      "value": "4.70",
+      "tolerance": "\u00b10.10"
+    }
+  }
+}
