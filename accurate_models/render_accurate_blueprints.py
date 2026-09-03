@@ -230,94 +230,121 @@ def render_outlet_box_blueprint():
 # 3. RENDER MATED ASSEMBLY BLUEPRINT
 # ==============================================================================
 def render_mated_blueprint():
-    print("Rendering mated_assembly_blueprint.png...")
-    mated = trimesh.load(os.path.join(target_dir, "mated_assembly.obj"))
-    
-def render_mated_blueprint():
     print("Rendering mated_assembly_blueprint.png (3-Part System)...")
     h_mesh = trimesh.load(os.path.join(target_dir, "mated_outer_housing.stl"))
     b_mesh = trimesh.load(os.path.join(target_dir, "mated_outlet_box.stl"))
     c_mesh = trimesh.load(os.path.join(target_dir, "mated_connector.stl"))
     
     fig = plt.figure(figsize=(24, 15), dpi=160)
-    plt.subplots_adjust(left=0.03, right=0.97, top=0.88, bottom=0.04, wspace=0.10, hspace=0.18)
+    plt.subplots_adjust(left=0.04, right=0.96, top=0.90, bottom=0.04, wspace=0.12, hspace=0.18)
     fig.patch.set_facecolor('#070d19')
     
-    fig.suptitle("KIA EV6 / E-GMP 95190-CV780 V2L COMPLETE 3-PART MATED ASSEMBLY\nOuter Housing Bezel + AC Outlet Box + Orange HV Connector",
-                 color='white', fontsize=17, weight='bold', y=0.96)
+    fig.suptitle("KIA EV6 / E-GMP 95190-CV780 V2L COMPLETE 3-PART MATED ASSEMBLY\nOuter Housing Bezel + AC Outlet Box + Orange HV Connector (Front-Facing View: Outlet on Right, Connector on Left)",
+                 color='white', fontsize=16, weight='bold', y=0.96)
     
-    # PANEL 1: Front Elevation Mated View (Cabin Perspective)
-    ax1 = fig.add_subplot(2, 2, 1, projection='3d')
-    plot_mesh(ax1, h_mesh, color='#334155', edge_color='#1e293b')
-    plot_mesh(ax1, b_mesh, color='#475569', edge_color='#0f172a')
-    plot_mesh(ax1, c_mesh, color='#ea580c', edge_color='#7c2d12')
-    setup_ax_3d(ax1, "PANEL 1: Front Elevation Mated View (Cabin Perspective)",
-                xlim=[-85, 85], ylim=[-75, 15], zlim=[-10, 110], elev=0, azim=90)
+    # 1. PANEL 1: FRONT ELEVATION (2D True Projection: X vs Z)
+    ax1 = fig.add_subplot(2, 2, 1)
+    ax1.set_facecolor('#0f172a')
+    ax1.set_title("PANEL 1: Front Elevation (Cabin View: Outlet on RIGHT, Connector on LEFT)", color='white', fontsize=12, weight='bold', pad=10)
+    ax1.tripcolor(h_mesh.vertices[:, 0], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
+    ax1.tripcolor(b_mesh.vertices[:, 0], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
+    ax1.tripcolor(c_mesh.vertices[:, 0], c_mesh.vertices[:, 2], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
+    ax1.set_xlim(-85, 85)
+    ax1.set_ylim(-15, 115)
+    ax1.set_aspect('equal')
+    ax1.tick_params(colors='#94a3b8')
+    ax1.set_xlabel("X (Width, mm: -X Left / Driver, +X Right / Passenger)", color='#94a3b8', fontsize=10)
+    ax1.set_ylabel("Z (Height, mm: Chin Bottom = 0, Roof Rim = 95.40)", color='#94a3b8', fontsize=10)
+    ax1.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt1 = (
-        "CONFIRMED FRONT INTERFACE:\n"
-        "• [H1] Total Outer Width: 142.30 mm\n"
-        "• [H2] Total Outer Height: 95.40 mm (100% Smooth Arch)\n"
+        "FRONT CABIN ORIENTATION (CONFIRMED):\n"
+        "• LEFT: Orange Connector & Flap Door (-X)\n"
+        "• RIGHT: Circular 120V AC Outlet Socket (+X)\n"
+        "• [H1] Total Width: 142.30 mm\n"
+        "• [H2] Total Height: 95.40 mm (Smooth Curved Roof)\n"
         "• [H3] Window Aperture: 114.60 mm x 50.20 mm [H4]\n"
-        "• Outlet Box Seated Centered with 1.42 mm Side Gap\n"
-        "• Left: Spring Flap Door ('Max AC 120V, 16A')\n"
-        "• Right: Circular NEMA 5-15R 120V AC Outlet\n"
-        "• Lower Chin Protrusion: 27.10 mm Below Plate"
+        "• Chin Protrusion: 27.10 mm Below Aluminum Plate"
     )
-    ax1.text2D(0.03, 0.95, txt1, transform=ax1.transAxes, color='#38bdf8', fontsize=9.5,
-               va='top', linespacing=1.35,
-               bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
+    ax1.text(0.03, 0.95, txt1, transform=ax1.transAxes, color='#38bdf8', fontsize=9.5, va='top',
+             bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
 
-    # PANEL 2: Left Side Elevation Mated View
-    ax2 = fig.add_subplot(2, 2, 2, projection='3d')
-    plot_mesh(ax2, h_mesh, color='#334155', edge_color='#1e293b')
-    plot_mesh(ax2, b_mesh, color='#475569', edge_color='#0f172a')
-    plot_mesh(ax2, c_mesh, color='#ea580c', edge_color='#7c2d12')
-    setup_ax_3d(ax2, "PANEL 2: Side Elevation Mated View (Depth & Seating)",
-                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=0, azim=0)
+    # 2. PANEL 2: SIDE PROFILE (2D True Projection: Y vs Z)
+    ax2 = fig.add_subplot(2, 2, 2)
+    ax2.set_facecolor('#0f172a')
+    ax2.set_title("PANEL 2: Side Profile (Depth & Seating: Cable Extending Rearward)", color='white', fontsize=12, weight='bold', pad=10)
+    ax2.tripcolor(h_mesh.vertices[:, 1], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
+    ax2.tripcolor(b_mesh.vertices[:, 1], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
+    ax2.tripcolor(c_mesh.vertices[:, 1], c_mesh.vertices[:, 2], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
+    ax2.set_xlim(-185, 20)
+    ax2.set_ylim(-15, 115)
+    ax2.set_aspect('equal')
+    ax2.tick_params(colors='#94a3b8')
+    ax2.set_xlabel("Y (Depth, mm: +Y Cabin Front, -Y Interior Dash Cavity)", color='#94a3b8', fontsize=10)
+    ax2.set_ylabel("Z (Height, mm)", color='#94a3b8', fontsize=10)
+    ax2.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt2 = (
         "SIDE DEPTH & CLEARANCES:\n"
         "• [H7a] Side Wall Depth: 58.80 mm (Gentle 5.6° Wing Slope)\n"
-        "• Wings Flush Under Curved Roof Arch (Never Extend Above)\n"
+        "• Wings Flush Under Curved Roof Arch (Never Protrude Above)\n"
         "• Aluminum Plate: 6.90 mm Below Window Aperture\n"
         "• Internal Bend Angle: 84.13° (5.87° Upward Pitch)\n"
         "• Connector Plugs into Rear Collar at Z = 44.65 mm\n"
-        "• Verified Seated Gap: 4.70 mm\n"
-        "• Heavy-Gauge Cable Extends Rearward into Dash Cavity"
+        "• Verified Seated Gap: 4.70 mm (17.67 mm Engagement)\n"
+        "• Cable Extends Rearward into Dash Cavity (-Y)"
     )
-    ax2.text2D(0.03, 0.95, txt2, transform=ax2.transAxes, color='#38bdf8', fontsize=9.5,
-               va='top', linespacing=1.35,
-               bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
+    ax2.text(0.03, 0.95, txt2, transform=ax2.transAxes, color='#38bdf8', fontsize=9.5, va='top',
+             bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
 
-    # PANEL 3: Top Plan Mated View
-    ax3 = fig.add_subplot(2, 2, 3, projection='3d')
-    plot_mesh(ax3, h_mesh, color='#334155', edge_color='#1e293b')
-    plot_mesh(ax3, b_mesh, color='#475569', edge_color='#0f172a')
-    plot_mesh(ax3, c_mesh, color='#ea580c', edge_color='#7c2d12')
-    setup_ax_3d(ax3, "PANEL 3: Top Plan Mated View (Wings & Floor Plate Span)",
-                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=90, azim=-90)
+    # 3. PANEL 3: TOP PLAN VIEW (2D True Projection: X vs Y)
+    ax3 = fig.add_subplot(2, 2, 3)
+    ax3.set_facecolor('#0f172a')
+    ax3.set_title("PANEL 3: Top Plan View (Wings & Floor Plate Span: Looking Down from Above)", color='white', fontsize=12, weight='bold', pad=10)
+    ax3.tripcolor(h_mesh.vertices[:, 0], h_mesh.vertices[:, 1], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
+    ax3.tripcolor(b_mesh.vertices[:, 0], b_mesh.vertices[:, 1], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
+    ax3.tripcolor(c_mesh.vertices[:, 0], c_mesh.vertices[:, 1], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
+    ax3.set_xlim(-85, 85)
+    ax3.set_ylim(-185, 20)
+    ax3.set_aspect('equal')
+    ax3.tick_params(colors='#94a3b8')
+    ax3.set_xlabel("X (Width, mm)", color='#94a3b8', fontsize=10)
+    ax3.set_ylabel("Y (Depth, mm: -Y Rearward, +Y Forward)", color='#94a3b8', fontsize=10)
+    ax3.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt3 = (
-        "HORIZONTAL CLEARANCES:\n"
+        "HORIZONTAL SPAN & CLEARANCES:\n"
         "• [H11] Inner Wing Clear Span: 140.50 mm\n"
         "• Aluminum Floor Plate Width: 120.20 mm\n"
         "• [H11b] Space Between Wing & Aluminum: 10.15 mm\n"
         "• Aluminum Floor Holes: 7.45x6.45 Oval + Ø 6.45 Round\n"
-        "• Central Hole 7.60 mm from Back, Oval 7.30 mm from Back\n"
         "• Connector Placed on Left Flank (Clear of Chassis Bolt)"
     )
-    ax3.text2D(0.03, 0.95, txt3, transform=ax3.transAxes, color='#38bdf8', fontsize=9.5,
-               va='top', linespacing=1.35,
-               bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
+    ax3.text(0.03, 0.95, txt3, transform=ax3.transAxes, color='#38bdf8', fontsize=9.5, va='top',
+             bbox=dict(boxstyle='round,pad=0.5', facecolor='#0b1329', edgecolor='#38bdf8', alpha=0.92, lw=1.2))
 
-    # PANEL 4: 3D Isometric View
+    # 4. PANEL 4: 3D ISOMETRIC VIEW (Cabin Perspective: Looking from Front-Left at Bezel)
     ax4 = fig.add_subplot(2, 2, 4, projection='3d')
-    plot_mesh(ax4, h_mesh, color='#334155', edge_color='#1e293b')
-    plot_mesh(ax4, b_mesh, color='#475569', edge_color='#0f172a')
-    plot_mesh(ax4, c_mesh, color='#ea580c', edge_color='#7c2d12')
-    setup_ax_3d(ax4, "PANEL 4: 3D Isometric Mated Perspective",
-                xlim=[-85, 85], ylim=[-185, 15], zlim=[-10, 110], elev=25, azim=-55)
+    ax4.set_facecolor('#0f172a')
+    ax4.set_title("PANEL 4: 3D Isometric Mated Perspective (Cabin Front-Quarter View)", color='#22c55e', fontsize=12, weight='bold', pad=10)
+    
+    def add_mesh_3d(mesh, color, edge_color, alpha=0.85):
+        v = mesh.vertices
+        f = mesh.faces[::2]
+        pc = Poly3DCollection(v[f], facecolors=color, alpha=alpha)
+        pc.set_edgecolor(edge_color)
+        pc.set_linewidth(0.2)
+        ax4.add_collection3d(pc)
+
+    add_mesh_3d(h_mesh, '#334155', '#1e293b', alpha=0.8)
+    add_mesh_3d(b_mesh, '#475569', '#0f172a', alpha=0.85)
+    add_mesh_3d(c_mesh, '#ea580c', '#7c2d12', alpha=0.95)
+
+    ax4.set_xlim(-85, 85)
+    ax4.set_ylim(-185, 20)
+    ax4.set_zlim(-10, 110)
+    ax4.view_init(elev=22, azim=-125)
+    ax4.axis('off')
     
     art_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\ca2c4a5c-394a-4c0b-b99d-8dde76573538"
     os.makedirs(art_dir, exist_ok=True)
