@@ -242,25 +242,25 @@ def render_mated_blueprint():
     fig.suptitle("KIA EV6 / E-GMP 95190-CV780 V2L COMPLETE 3-PART MATED ASSEMBLY\nOuter Housing Bezel + AC Outlet Box + Orange HV Connector (Front-Facing View: Outlet on Right, Connector on Left)",
                  color='white', fontsize=16, weight='bold', y=0.96)
     
-    # 1. PANEL 1: FRONT ELEVATION (2D True Projection: X vs Z)
+    # 1. PANEL 1: FRONT ELEVATION (2D Cabin View: Outlet on RIGHT, Connector on LEFT)
     ax1 = fig.add_subplot(2, 2, 1)
     ax1.set_facecolor('#0f172a')
     ax1.set_title("PANEL 1: Front Elevation (Cabin View: Outlet on RIGHT, Connector on LEFT)", color='white', fontsize=12, weight='bold', pad=10)
-    ax1.tripcolor(h_mesh.vertices[:, 0], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
-    ax1.tripcolor(b_mesh.vertices[:, 0], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
-    ax1.tripcolor(c_mesh.vertices[:, 0], c_mesh.vertices[:, 2], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
+    ax1.tripcolor(-h_mesh.vertices[:, 0], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
+    ax1.tripcolor(-b_mesh.vertices[:, 0], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
+    ax1.tripcolor(-c_mesh.vertices[:, 0], c_mesh.vertices[:, 2], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
     ax1.set_xlim(-85, 85)
     ax1.set_ylim(-15, 115)
     ax1.set_aspect('equal')
     ax1.tick_params(colors='#94a3b8')
-    ax1.set_xlabel("X (Width, mm: -X Left / Driver, +X Right / Passenger)", color='#94a3b8', fontsize=10)
+    ax1.set_xlabel("Cabin View Horizontal Span (mm: Left = Connector / Door, Right = 120V Outlet)", color='#94a3b8', fontsize=10)
     ax1.set_ylabel("Z (Height, mm: Chin Bottom = 0, Roof Rim = 95.40)", color='#94a3b8', fontsize=10)
     ax1.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt1 = (
         "FRONT CABIN ORIENTATION (CONFIRMED):\n"
-        "• LEFT: Orange Connector & Flap Door (-X)\n"
-        "• RIGHT: Circular 120V AC Outlet Socket (+X)\n"
+        "• LEFT: Orange Connector & Flap Door\n"
+        "• RIGHT: Circular 120V AC Outlet Socket\n"
         "• [H1] Total Width: 142.30 mm\n"
         "• [H2] Total Height: 95.40 mm (Smooth Curved Roof)\n"
         "• [H3] Window Aperture: 114.60 mm x 50.20 mm [H4]\n"
@@ -301,14 +301,14 @@ def render_mated_blueprint():
     ax3 = fig.add_subplot(2, 2, 3)
     ax3.set_facecolor('#0f172a')
     ax3.set_title("PANEL 3: Top Plan View (Wings & Floor Plate Span: Looking Down from Above)", color='white', fontsize=12, weight='bold', pad=10)
-    ax3.tripcolor(h_mesh.vertices[:, 0], h_mesh.vertices[:, 1], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
-    ax3.tripcolor(b_mesh.vertices[:, 0], b_mesh.vertices[:, 1], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
-    ax3.tripcolor(c_mesh.vertices[:, 0], c_mesh.vertices[:, 1], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
+    ax3.tripcolor(-h_mesh.vertices[:, 0], h_mesh.vertices[:, 1], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.35, edgecolors='#1e293b', lw=0.2)
+    ax3.tripcolor(-b_mesh.vertices[:, 0], b_mesh.vertices[:, 1], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.6, edgecolors='#0f172a', lw=0.2)
+    ax3.tripcolor(-c_mesh.vertices[:, 0], c_mesh.vertices[:, 1], c_mesh.faces, facecolors=np.ones(len(c_mesh.faces)), cmap='Oranges', alpha=0.85, edgecolors='#7c2d12', lw=0.2)
     ax3.set_xlim(-85, 85)
     ax3.set_ylim(-185, 20)
     ax3.set_aspect('equal')
     ax3.tick_params(colors='#94a3b8')
-    ax3.set_xlabel("X (Width, mm)", color='#94a3b8', fontsize=10)
+    ax3.set_xlabel("Horizontal Span (mm: Left = Connector, Right = Outlet)", color='#94a3b8', fontsize=10)
     ax3.set_ylabel("Y (Depth, mm: -Y Rearward, +Y Forward)", color='#94a3b8', fontsize=10)
     ax3.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     

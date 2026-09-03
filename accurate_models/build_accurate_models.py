@@ -425,29 +425,33 @@ def build_mated_assembly():
         lp.visual.vertex_colors = [15, 23, 42, 255]
 
     # 2. FRONT AC SOCKET DETAILS ON BOX FACE (Y in [-3.00, 0.0] mm)
-    # Left: Hinged flap door ("Max AC 120V, 16A") on LEFT (-X)
-    door = create_box([52.0, 2.5, 43.0], [-27.0, -1.25, z_box_center])
+    # Looking at the outlet from the cabin (looking along -Y into the dash cavity):
+    # - Viewer's LEFT is +X: Spring flap door & Orange HV Connector collar
+    # - Viewer's RIGHT is -X: Circular NEMA 5-15R 120V AC outlet socket
+    # Left: Hinged flap door ("Max AC 120V, 16A") on LEFT (+X)
+    door = create_box([52.0, 2.5, 43.0], [+27.0, -1.25, z_box_center])
     door.visual.vertex_colors = [30, 41, 59, 255] # Matte black ABS
     # Embossed plug emblem
-    door_icon = create_box([22.0, 0.8, 6.0], [-27.0, 0.4, z_box_center])
+    door_icon = create_box([22.0, 0.8, 6.0], [+27.0, 0.4, z_box_center])
     door_icon.visual.vertex_colors = [203, 213, 225, 255] # Silver printed icon
     
-    # Right: Circular AC 120V outlet face with 3-prong receptacle on RIGHT (+X)
+    # Right: Circular AC 120V outlet face with 3-prong receptacle on RIGHT (-X)
     rot_x = trimesh.transformations.rotation_matrix(np.pi / 2, [1, 0, 0])
     socket_face = trimesh.creation.cylinder(radius=20.0, height=2.5, sections=32)
     socket_face.apply_transform(rot_x)
-    socket_face.apply_translation([27.0, -1.25, z_box_center])
+    socket_face.apply_translation([-27.0, -1.25, z_box_center])
     socket_face.visual.vertex_colors = [15, 23, 42, 255] # Dark charcoal outlet
     
     # Prongs: hot slot, neutral slot, ground pin
-    slot_hot = create_box([2.4, 3.0, 10.0], [27.0 - 7.0, -1.0, z_box_center + 3.0])
-    slot_neu = create_box([3.2, 3.0, 10.0], [27.0 + 7.0, -1.0, z_box_center + 3.0])
-    slot_gnd = create_box([4.8, 3.0, 4.8],  [27.0, -1.0, z_box_center - 7.0])
+    slot_hot = create_box([2.4, 3.0, 10.0], [-27.0 - 7.0, -1.0, z_box_center + 3.0])
+    slot_neu = create_box([3.2, 3.0, 10.0], [-27.0 + 7.0, -1.0, z_box_center + 3.0])
+    slot_gnd = create_box([4.8, 3.0, 4.8],  [-27.0, -1.0, z_box_center - 7.0])
     for s in [slot_hot, slot_neu, slot_gnd]:
         s.visual.vertex_colors = [2, 6, 23, 255]
 
     # 3. RECEPTACLE COLLAR AT REAR OF BOX (Extending from Y = -36.21 mm along -Y)
-    collar_x = -27.0
+    # Placed on LEFT side of box (+X) behind the flap door
+    collar_x = 27.0
     collar_w = 22.70 # [D1]
     collar_h = 33.05 # [D2]
     collar_len = 22.37 # [C1]
@@ -463,7 +467,7 @@ def build_mated_assembly():
     mated_box = trimesh.util.concatenate(box_components)
 
     # 4. ORANGE HV CONNECTOR (Plugged into collar with 4.70 mm seated gap)
-    # Shroud front rim seats at Y = y_box_back - 4.70 = -40.91 mm
+    # Shroud front rim seats at Y = y_box_back - 4.70 = -40.91 mm on LEFT (+X)
     rot_conn = trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0])
     c_rot = connector_mesh.copy()
     c_rot.apply_transform(rot_conn)
