@@ -1,44 +1,64 @@
-# Heavy-Duty V2L Cable Connector Lock (Kia EV6 / E-GMP 95190-CV780)
+﻿# Kia EV6 / Hyundai E-GMP 95190-CV780 V2L Complete CAD System & Connector Lock
 
-This project contains the complete 3D-printable external locking bracket system engineered to physically lock the orange V2L cable connector into the vehicle's black outlet box.
+Comprehensive engineering repository containing high-fidelity, caliper-calibrated 3D CAD models of the vehicle outlet assembly, physical measurements ground truth, multimodal AI blueprints, and retention lock prototypes.
 
 ---
 
-## 📂 Production Deliverables (Root Folder)
+## 📂 Repository Structure
+
+```text
+hv_lock/
+├── accurate_models/               # Master Caliper-Calibrated 3D CAD Models & AI Blueprints
+│   ├── mated_assembly.stl         # Complete 3-part watertight mated assembly (8,708 faces)
+│   ├── mated_assembly.obj         # 3-part assembly with materials & vertex colors
+│   ├── mated_outer_housing.stl    # Outer cowl bezel & stamped aluminum bracket
+│   ├── mated_outlet_box.stl       # Calibrated outlet box module
+│   ├── mated_connector.stl        # Orange HV connector plug seated in receptacle collar
+│   ├── mated_assembly_blueprint_ai.png # 5K Multimodal AI technical blueprint
+│   ├── mated_assembly_blueprint_ai.json# Machine-readable metadata & coordinate anchors
+│   ├── generate_ai_blueprint.py   # AI blueprint & JSON generator script
+│   ├── build_accurate_models.py   # Master CAD synthesis script
+│   ├── render_accurate_blueprints.py # Standard orthographic blueprint renderer
+│   ├── outer_housing_measurements.json # Outer housing dimensional parameters
+│   └── README_AI.md               # Detailed AI agent topology manual
+│
+├── caliper_measurements.csv       # Master physical caliper ground truth table
+├── caliper_measurements.xlsx      # Formatted Excel workbook with calculations
+├── README.md                      # Primary project overview (this file)
+├── README_AI.md                   # AI topology atlas & datum reference guide
+├── .gitignore                     # Git ignore rules
+│
+└── testing/                       # All Testing Scripts, Early Prototypes & Concept Iterations
+    ├── chassis_bolt_lock.*        # Direct chassis bolt lock prototypes & prints
+    ├── c_bracket.*                # 2-piece monolithic C-bracket prototypes & prints
+    ├── exact_chassis_bolt_lock.*  # Calibrated chassis lock variations
+    ├── concept1_notch_deadbolt.stl# Early concept 1 deadbolt
+    ├── concept2_c_bracket_cage.stl# Early concept 2 cage
+    ├── concept3_chassis_bracket_retainer.stl # Early concept 3 bracket
+    ├── print_plate_all_parts.stl  # Combined print plates for prototype testing
+    ├── build_*.py                 # Historical build scripts
+    ├── illustrate_*.py            # Historical diagram generators
+    ├── render_*.py                # Historical rendering scripts
+    └── *.png                      # Historical test diagrams and blue prints
+```
+
+---
+
+## 📐 Primary Production Deliverables (`accurate_models/`)
 
 | File | Format | Description |
 | :--- | :---: | :--- |
-| **`print_plate_all_parts.stl`** | **STL (Binary)** | **Recommended: Both parts pre-arranged flat on build plate for 1-click support-free printing** |
-| `print_plate_all_parts.obj` | OBJ | 3D mesh format with vertex normals |
-| `c_bracket_spine.stl` | STL | Part 1: Monolithic structural C-Spine alone |
-| `c_bracket_keeper.stl` | STL | Part 2: Toolless slide-in locking keeper alone |
-| `c_bracket.scad` | OpenSCAD | Full parametric source code for adjusting dimensions |
-| `how_it_works_explained.png` | Image | 4-step engineering storyboard explaining the mechanical trap |
-| `c_bracket_blueprint.png` | Image | Dimensioned orthographic blueprint and cross-section |
-| `caliper_measurements.xlsx` | Excel | Styled measurement spreadsheet with confirmed caliper data |
-| `caliper_measurements.csv` | CSV | Raw caliper measurements |
-
-All testing scripts, intermediate iterations, and reference models have been archived into the `testing/` subdirectory.
+| **`mated_assembly.stl`** | STL (Binary) | Complete 3-part solid watertight assembly ($142.30 \times 166.71 \times 95.40\text{ mm}$) |
+| **`mated_assembly.obj`** | OBJ | Multi-component assembly with materials, vertex colors, and normals |
+| **`mated_outer_housing.stl`** | STL | Outer cowl bezel with smooth curved roof, $5.6^\circ$ wings, stamped aluminum plate |
+| **`mated_outlet_box.stl`** | STL | Box enclosure seated $16.79\text{ mm}$ ahead of plate back ($3.04\text{ mm}$ hole clearance) |
+| **`mated_connector.stl`** | STL | Orange HV connector plug seated in collar with confirmed $4.70\text{ mm}$ gap |
+| **`mated_assembly_blueprint_ai.png`** | Image (5K) | Multimodal AI blueprint with all 35+ physical caliper measurement ties |
+| **`mated_assembly_blueprint_ai.json`**| JSON | Machine-readable bounding boxes, datum reference frames, and tolerances |
 
 ---
 
-## 🖨️ Recommended Slicer Settings
+## 🤖 AI & Multimodal System Reference
 
-- **File to Open**: `print_plate_all_parts.stl`
-- **Material**: **PETG** (Recommended for automotive heat/creep resistance) or ABS / ASA
-- **Layer Height**: `0.20 mm`
-- **Perimeters / Walls**: **4 walls** (Critical for maximum tensile strength of the spine)
-- **Top / Bottom Layers**: `5 top` / `5 bottom`
-- **Infill**: `40% Gyroid or Grid`
-- **Supports**: **0% (NONE)** — 100% support-free design
-- **Print Time**: ~65–70 minutes total on standard FDM printers (Bambu Lab, Prusa, Creality)
-
----
-
-## 🔒 3-Step Operation Flow
-
-1. **Plug In**: Push the orange connector into the car's outlet receptacle until seated ($4.7\text{ mm}$ gap).
-2. **Drop C-Spine**: Hook the top lip of the blue C-Spine over the top edge of the black outlet box lid.
-3. **Slide Keeper**: Slide the green keeper into the bottom track with your thumb until it clicks into the snap detents.
-   - *Result*: The orange connector's rigid shoulder is trapped against the keeper. Pulling on the cable is directly resisted by the rigid box lid with $>40\text{ kg}$ ($90\text{ lbs}$) of pullout strength!
-   - *To Unplug*: Push the green thumb tab and slide the keeper out.
+For AI agents, vision-language models, and automated CAD pipelines:
+- Refer to [**`README_AI.md`**](README_AI.md) or [`accurate_models/README_AI.md`](accurate_models/README_AI.md) for full coordinate system specifications, topological constraints, and design rules for lock mechanisms.
