@@ -1,0 +1,57 @@
+Group,Label,Feature Description,How to Measure with Calipers,Priority,Est. Range (mm),Measured Value (mm),Engineering Notes
+Panel A: Plug Mating Face,[A1],Shroud Outer Width,Widest outer horizontal span across orange oval shroud (exclude side key ribs),Critical,36 - 38,36.1,Included tab
+Panel A: Plug Mating Face,[A2],Shroud Body Height,Outer vertical height of oval body (bottom wall to arch below tower),Critical,24 - 26,20.8,Measured directly across oval
+Panel A: Plug Mating Face,[A3],Tower Outer Width,Outer horizontal width across the top rectangular latch tower,Critical,14 - 16,19.06,Tower channel alignment
+Panel A: Plug Mating Face,[A4],Total Plug Height,Bottom outer wall of oval shroud to top flat face of latch tower,Critical,34 - 36,37.11,Included tab (rib)
+Panel A: Plug Mating Face,[A5],Shroud Wall Thickness,Caliper inside-to-outside thickness of orange outer perimeter wall,Recommended,1.5 - 2.0,1.2,Internal clearance step
+Panel A: Plug Mating Face,[A6],Key Rib Protrusion,Distance the side alignment keying rib sticks out from outer oval wall,Recommended,2.0 - 2.5,4.8,Slot keyway relief
+Panel B: Latch Tower & Slider,[B1],Tower Axial Length,Length of top rectangular tower from front mating rim back to shoulder/tape,Critical,18 - 22,36.75,Slide carriage base length
+Panel B: Latch Tower & Slider,[B2],Slider Track Inner Width,Inside width of channel/cavity where orange slider sits,Critical,10 - 12,17.8,Internal channel width
+Panel B: Latch Tower & Slider,[B3],Slider Track Stroke Length,Usable linear stroke length of yellow slider track,Recommended,8 - 12,8.25,Slide travel range
+Panel B: Latch Tower & Slider,[B4],Slider Total Length,Overall length of detached orange slider piece,Critical,15 - 18,23.0,CPA slider replacement ref
+Panel B: Latch Tower & Slider,[B5],Slider Width,Width across main body / thumb pad of orange slider,Critical,8 - 10,7.3,CPA slider replacement ref
+Panel B: Latch Tower & Slider,[B6],Slider Thickness,Thickness / height of orange slider piece,Recommended,3 - 4,4.45,CPA slider replacement ref
+Panel B: Latch Tower & Slider,[B7],Body Rigid Length,Length of rigid orange housing from front rim to rear cable exit boot,Recommended,45 - 55,54.6,Defines rear shoulder position where keeper locks
+Panel C: Outlet Receptacle,[C1],Collar Protrusion Length,How far black receptacle collar extends outward from black backplate,Critical,15 - 20,22.37,Mating engagement depth
+Panel C: Outlet Receptacle,[C2],Tooth Distance from Rim,Distance from front mating rim of black collar to vertical latch tooth step,Critical,8 - 11,8.73,From farthest part of tooth which is sloped
+Panel C: Outlet Receptacle,[C3],Latch Tooth Width,Width of raised latch tooth / ramp,Critical,3 - 5,2.0,Locking tongue engagement
+Panel C: Outlet Receptacle,[C4],Latch Tooth Height,Height latch tooth protrudes above outer top surface of collar,Critical,1.5 - 2.5,2.7,"Max height, since tooth is sloped"
+Panel C: Guide Ribs Spacing,[C5],Guide Ribs Spacing,Outside width across the two guide ribs flanking the latch tooth,Recommended,8 - 10,13.82,Exterior dimension
+Panel D: Receptacle Face & Clearances,[D1],Collar Outer Width,Horizontal outer width across black protruding receptacle collar,Recommended,32 - 34,22.7,Includes alignment rib
+Panel D: Receptacle Face & Clearances,[D2],Collar Outer Height,Vertical outer height across black protruding receptacle collar,Recommended,20 - 22,33.05,Includes alignment rib
+Panel D: Receptacle Face & Clearances,[D3],Metal Plate Clearance,Distance from right edge of black collar to vertical silver metal plate,Recommended,6 - 9,4.0,Rough estimate
+Panel D: Receptacle Face & Clearances,[D4],Top Clearance,Free clearance above collar before hitting upper housing / wiring,Recommended,10 - 15,8.27,Measured from top of enclosure to top of outer receptacle
+Panel E: Outlet Box Housing,[E1],Box Height,Collar seating face up to top flat surface of the lid,Critical,38 - 44,42.67,Note: back of box is not flat where connector plugs in
+Panel E: Outlet Box Housing,[E2],Box Depth,Front vertical wall to rear vertical wall across box body,Critical,45 - 52,48.15,Distance from front face to rear hook anchor
+Panel E: Outlet Box Housing,[E3a],Lid Overhang Height,Vertical thickness / height of the overhanging lid rim,Critical,3.0 - 5.0,4.58,C-Spine hook drop height
+Panel E: Outlet Box Housing,[E3b],Lid Overhang Width,Horizontal distance the lid lip extends past the rear wall,Critical,8.0 - 15.0,12.45,C-Spine hook shelf width (massive positive engagement)
+Panel E: Outlet Box Housing,[E4],Box Width,Width across the black housing section,Critical,48 - 56,49.65,Determines C-Spine interior clearance width (51.5mm)
+Panel E: Outlet Box Housing,[GAP],Seated Gap,Distance between front face of connector and outlet housing when seated,Critical,4.0 - 6.0,4.7,Front connector clearance
+Panel F: Outer Housing Bezel,[H1],Total Outer Width,Widest horizontal span across outer housing edges,Critical,140 - 180,142.3,Confirmed caliper
+Panel F: Outer Housing Bezel,[H2],Total Outer Height,Bottom of lower chin to top outer rim face,Critical,90 - 100,95.4,Confirmed caliper
+Panel F: Outer Housing Bezel,[H3],Window Aperture Width,Inside horizontal opening where AC outlet sits,Critical,112 - 125,114.6,Confirmed caliper (>111.75mm outlet box)
+Panel F: Outer Housing Bezel,[H4],Window Aperture Height,Inside vertical height of rectangular opening,Critical,48 - 58,50.2,Confirmed caliper
+Panel F: Outer Housing Bezel,[H5],Lower Chin Height,Vertical thickness of protruding bottom bar,Recommended,25 - 32,30.77,Confirmed caliper
+Panel F: Outer Housing Bezel,[H5b],Chin Total Thickness,Front-to-back depth of chin including molded ribs in back,Critical,6.0 - 8.5,7.1,Confirmed caliper (user refined)
+Panel F: Outer Housing Bezel,[H6],Top Bezel Frame Thickness,Distance from top outer rim to top of window aperture,Recommended,8 - 14,11.2,Calculated from 95.40 - 84.20
+Panel F: Outer Housing Bezel,[H7a],Side Wall Depth,Front bezel face straight back to rear plastic edge of side wing,Critical,55 - 65,58.8,Confirmed caliper
+Panel F: Outer Housing Bezel,[H9],Top Shelf Flat Length,Length of horizontal top section before angled drop,Recommended,30 - 40,34.0,Confirmed caliper
+Panel F: Outer Housing Bezel,[H10],Aluminum Rear Extension,Distance silver sheet metal clip extends backwards,Recommended,45 - 55,53.0,Confirmed caliper
+Panel F: Outer Housing Bezel,[H11],Inner Wing Clear Span,Clear inside width between left and right side walls,Critical,135 - 145,140.5,Confirmed caliper
+Panel F: Outer Housing Bezel,[H11b],Wing to Aluminum Space,Horizontal clearance between plastic wing and horizontal aluminum plate,Critical,9.0 - 11.5,10.15,Confirmed caliper (user refined)
+Panel F: Outer Housing Bezel,[H12],Aluminum Bracket Width,Width of horizontal stamped sheet metal frame,Critical,118 - 125,120.2,140.50 - 2x10.15 = 120.20mm
+Panel F: Outer Housing Bezel,[H13],Side Wall Thickness,Plastic wall thickness of the side wings,Recommended,2.0 - 3.0,2.6,Confirmed caliper
+Panel F: Outer Housing Bezel,[H14],Window Recess Step Depth,Depth of internal ledge where outlet face seats,Recommended,2.5 - 4.0,3.0,Confirmed caliper
+Panel F: Outer Housing Bezel,[H15a],Aluminum Outer Hole Offset,Distance from side of aluminum to outer edge of horizontal oval slot,Critical,14 - 18,16.75,Confirmed caliper
+Panel F: Outer Housing Bezel,[H15b],Aluminum Outer Oval Width (X),Width of horizontal oval slot along X (rotated 90 deg),Critical,6.5 - 8.5,7.45,Confirmed caliper (horizontal slot)
+Panel F: Outer Housing Bezel,[H15c],Aluminum Holes Edge Spacing,Distance from inner edge of oval slot to outer edge of central hole,Critical,35 - 40,37.95,Confirmed caliper
+Panel F: Outer Housing Bezel,[H15d],Aluminum Central Hole Diameter,Diameter of central circular round hole through aluminum floor,Critical,5.5 - 7.5,6.45,Confirmed caliper
+Panel F: Outer Housing Bezel,[H15e],Aluminum Holes Center Spacing,Center-to-center distance between the two holes,Critical,40 - 50,44.9,Calculated center-to-center
+Panel F: Outer Housing Bezel,[H15f],Central Hole Back Edge Dist,Distance from back edge of aluminum to central hole,Critical,6.0 - 9.0,7.6,Confirmed caliper (7.6mm to back edge)
+Panel F: Outer Housing Bezel,[H15g],Outer Oval Back Edge Dist,Distance from back edge of aluminum to outer horizontal oval slot,Critical,6.0 - 9.0,7.3,Confirmed caliper (7.3mm to back edge)
+Panel F: Outer Housing Bezel,[H16a],50mm Triangle Chord Distance,Distance between 50mm marks on traced angle legs,Critical,64 - 70,67.0,Confirmed caliper (chord C=67mm)
+Panel F: Outer Housing Bezel,[H16b],Internal Bend Angle,Calibrated internal bend angle of aluminum plate,Critical,82 - 86,84.13,2 * arcsin(67/100) = 84.13 deg
+Panel F: Outer Housing Bezel,[H16c],Upward Pitch Angle,Upward tilt angle of aluminum plate toward ceiling,Critical,4.0 - 8.0,5.87,90.0 - 84.13 = 5.87 deg pitch
+Panel F: Outer Housing Bezel,[H16d],Wing Bottom Termination,Vertical height where side wings terminate (aligned with window),Critical,32 - 36,34.0,Aligned with window bottom
+Panel F: Outer Housing Bezel,[H16f],Chin Below Aluminum Plate,Vertical distance chin extends down below aluminum plate,Critical,25 - 29,27.1,Confirmed caliper (chin extends 27.1mm)
+Panel F: Outer Housing Bezel,[H16g],Plate Below Window Aperture,Vertical distance aluminum plate is below window opening,Critical,6.0 - 8.0,6.9,Confirmed caliper (plate 6.9mm below window)
