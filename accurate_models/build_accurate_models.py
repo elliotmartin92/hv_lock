@@ -378,12 +378,16 @@ def build_mated_assembly():
        - 10.15 mm horizontal space to each side wing
     2. Outlet Box:
        - 111.75 mm body seated squarely inside the 114.60 mm window aperture
-       - Front AC outlet face with hinged flap door & 120V 3-prong socket
-       - Box body extends rearward along -Y, supported over the aluminum plate
+       - Front AC outlet face with hinged flap door & 120V 3-prong socket (Y in [-3.00, 0.0] mm)
+       - Back of box is 16.79 mm from back of aluminum plate (Y = -53.00 + 16.79 = -36.21 mm) [H17a]
+         Leaving rear 16.79 mm of aluminum plate clear so chassis bolt holes are completely uncovered!
+       - Bottom of box is 9.10 mm vertically off near-horizontal aluminum plate (Z = 27.10 + 9.10 = 36.20 mm) [H17b]
+       - Box height: 46.00 mm (Z in [36.20, 82.20] mm, centered within window Z in [34.00, 84.20] mm)
     3. Orange HV Connector:
-       - Plugs into the receptacle collar at the rear of the box
-       - 4.70 mm seated gap verified
-       - Cable with yellow wrap extends rearward into dashboard cavity
+       - Receptacle collar at rear of box (Y = -36.21 mm) on left flank (X = -27.0 mm)
+       - Orange connector plugs into collar with verified 4.70 mm seated gap (shroud rim at Y = -40.91 mm)
+       - Collar penetrates 17.67 mm into connector shroud
+       - Heavy-gauge cable with yellow wrap extends rearward into dashboard cavity (-Y)
     """
     try:
         from build_outer_housing import build_outer_housing_model
@@ -393,64 +397,88 @@ def build_mated_assembly():
         from build_outer_housing import build_outer_housing_model
 
     housing_mesh, housing_parts = build_outer_housing_model()
-    box_mesh, box_parts = build_outlet_box_model()
     connector_mesh, conn_parts = build_connector_model()
 
-    # Clean box body without artificial right flange
-    box_clean = trimesh.util.concatenate(box_parts[:-1])
+    # 1. OUTLET BOX BODY MATCHING EXACT VEHICLE CALIPER MEASUREMENTS
+    # Rear of aluminum plate is at Y = -53.00 mm
+    # Back of box: Y = -53.00 + 16.79 = -36.21 mm [H17a]
+    # Front face at window step: Y = -3.00 mm
+    y_box_back = -36.21
+    y_box_front = -3.00
+    box_depth = y_box_front - y_box_back # 33.21 mm
 
-    # Add front AC socket details to box face
-    # Left: Hinged flap door (covering relay/wiring)
-    door = create_box([52.0, 2.5, 44.0], [-27.0, -1.25, 59.10])
+    # Aluminum plate root is at Z = 27.10 mm
+    # Bottom of box: Z = 27.10 + 9.10 = 36.20 mm [H17b]
+    z_box_bottom = 36.20
+    box_height = 46.00
+    z_box_top = z_box_bottom + box_height # 82.20 mm (centered in window Z in [34.00, 84.20])
+    z_box_center = (z_box_bottom + z_box_top) / 2.0 # 59.20 mm
+
+    box_width = 111.75
+    box_body = create_box([box_width, box_depth, box_height], [0.0, (y_box_back + y_box_front)/2.0, z_box_center])
+    box_body.visual.vertex_colors = [30, 41, 59, 255] # Matte black automotive ABS
+
+    # Top & bottom mounting perimeter lips
+    lip_top = create_box([114.0, 2.0, 3.0], [0.0, y_box_front - 1.0, z_box_top - 1.5])
+    lip_bot = create_box([114.0, 2.0, 3.0], [0.0, y_box_front - 1.0, z_box_bottom + 1.5])
+    for lp in [lip_top, lip_bot]:
+        lp.visual.vertex_colors = [15, 23, 42, 255]
+
+    # 2. FRONT AC SOCKET DETAILS ON BOX FACE (Y in [-3.00, 0.0] mm)
+    # Left: Hinged flap door ("Max AC 120V, 16A") on LEFT (-X)
+    door = create_box([52.0, 2.5, 43.0], [-27.0, -1.25, z_box_center])
     door.visual.vertex_colors = [30, 41, 59, 255] # Matte black ABS
     # Embossed plug emblem
-    door_icon = create_box([22.0, 0.8, 6.0], [-27.0, 0.4, 59.10])
+    door_icon = create_box([22.0, 0.8, 6.0], [-27.0, 0.4, z_box_center])
     door_icon.visual.vertex_colors = [203, 213, 225, 255] # Silver printed icon
     
-    # Right: Circular AC 120V outlet face with 3-prong receptacle
+    # Right: Circular AC 120V outlet face with 3-prong receptacle on RIGHT (+X)
     rot_x = trimesh.transformations.rotation_matrix(np.pi / 2, [1, 0, 0])
     socket_face = trimesh.creation.cylinder(radius=20.0, height=2.5, sections=32)
     socket_face.apply_transform(rot_x)
-    socket_face.apply_translation([27.0, -1.25, 59.10])
+    socket_face.apply_translation([27.0, -1.25, z_box_center])
     socket_face.visual.vertex_colors = [15, 23, 42, 255] # Dark charcoal outlet
     
     # Prongs: hot slot, neutral slot, ground pin
-    slot_hot = create_box([2.4, 3.0, 10.0], [27.0 - 7.0, -1.0, 59.10 + 3.0])
-    slot_neu = create_box([3.2, 3.0, 10.0], [27.0 + 7.0, -1.0, 59.10 + 3.0])
-    slot_gnd = create_box([4.8, 3.0, 4.8],  [27.0, -1.0, 59.10 - 7.0])
+    slot_hot = create_box([2.4, 3.0, 10.0], [27.0 - 7.0, -1.0, z_box_center + 3.0])
+    slot_neu = create_box([3.2, 3.0, 10.0], [27.0 + 7.0, -1.0, z_box_center + 3.0])
+    slot_gnd = create_box([4.8, 3.0, 4.8],  [27.0, -1.0, z_box_center - 7.0])
     for s in [slot_hot, slot_neu, slot_gnd]:
         s.visual.vertex_colors = [2, 6, 23, 255]
 
-    # Rotate box and connector so collar points rearward (-Y) into dashboard cavity
-    t_conn_rel = [26.0, -17.50, -4.70]
-    conn_in_collar = connector_mesh.copy()
-    conn_in_collar.apply_translation(t_conn_rel)
+    # 3. RECEPTACLE COLLAR AT REAR OF BOX (Extending from Y = -36.21 mm along -Y)
+    collar_x = -27.0
+    collar_w = 22.70 # [D1]
+    collar_h = 33.05 # [D2]
+    collar_len = 22.37 # [C1]
+    collar = create_box([collar_w, collar_len, collar_h], [collar_x, y_box_back - collar_len/2.0, z_box_center])
+    collar.visual.vertex_colors = [15, 23, 42, 255]
 
-    rot_neg90 = trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0])
-    b_rot = box_clean.copy()
-    b_rot.apply_transform(rot_neg90)
-    c_rot = conn_in_collar.copy()
-    c_rot.apply_transform(rot_neg90)
+    # Latch tooth on top of collar (+Z side)
+    latch_tooth = create_box([2.0, 2.7, 2.7], [collar_x, y_box_back - 8.73, z_box_center + collar_h/2.0 + 1.35])
+    latch_tooth.visual.vertex_colors = [239, 68, 68, 255] # Red indicator tooth
 
-    # Align into outer housing window opening:
-    # X centered at 0
-    # Z centered at 59.10 mm
-    # Front face seated at window recess step Y = -3.00 mm
-    dx = -55.875
-    dy = -3.00 - b_rot.bounds[1, 1]
-    dz = 59.10 - (b_rot.bounds[0, 2] + b_rot.bounds[1, 2]) / 2.0
-    t_final = [dx, dy, dz]
+    # Assemble box with all features
+    box_components = [box_body, lip_top, lip_bot, door, door_icon, socket_face, slot_hot, slot_neu, slot_gnd, collar, latch_tooth]
+    mated_box = trimesh.util.concatenate(box_components)
 
-    b_final = b_rot.copy()
-    b_final.apply_translation(t_final)
-    c_final = c_rot.copy()
-    c_final.apply_translation(t_final)
+    # 4. ORANGE HV CONNECTOR (Plugged into collar with 4.70 mm seated gap)
+    # Shroud front rim seats at Y = y_box_back - 4.70 = -40.91 mm
+    rot_conn = trimesh.transformations.rotation_matrix(-np.pi / 2, [1, 0, 0])
+    c_rot = connector_mesh.copy()
+    c_rot.apply_transform(rot_conn)
+    
+    shroud_front_y = c_rot.bounds[1, 1]
+    shroud_center_x = (c_rot.bounds[0, 0] + c_rot.bounds[1, 0]) / 2.0
+    shroud_center_z = (c_rot.bounds[0, 2] + c_rot.bounds[1, 2]) / 2.0
+    
+    dx_conn = collar_x - shroud_center_x
+    dy_conn = (y_box_back - 4.70) - shroud_front_y
+    dz_conn = z_box_center - shroud_center_z
+    c_rot.apply_translation([dx_conn, dy_conn, dz_conn])
+    mated_conn = c_rot
 
-    # Combine box body with front socket faceplate
-    mated_box = trimesh.util.concatenate([b_final, door, door_icon, socket_face, slot_hot, slot_neu, slot_gnd])
-    mated_conn = c_final
     mated_housing = housing_mesh.copy()
-
     full_mated_assembly = trimesh.util.concatenate([mated_housing, mated_box, mated_conn])
     return full_mated_assembly, mated_housing, mated_box, mated_conn
 

@@ -55,3 +55,5 @@ Panel F: Outer Housing Bezel,[H16c],Upward Pitch Angle,Upward tilt angle of alum
 Panel F: Outer Housing Bezel,[H16d],Wing Bottom Termination,Vertical height where side wings terminate (aligned with window),Critical,32 - 36,34.0,Aligned with window bottom
 Panel F: Outer Housing Bezel,[H16f],Chin Below Aluminum Plate,Vertical distance chin extends down below aluminum plate,Critical,25 - 29,27.1,Confirmed caliper (chin extends 27.1mm)
 Panel F: Outer Housing Bezel,[H16g],Plate Below Window Aperture,Vertical distance aluminum plate is below window opening,Critical,6.0 - 8.0,6.9,Confirmed caliper (plate 6.9mm below window)
+Panel F: Outer Housing Bezel,[H17a],Back of Box to Back of Plate,Horizontal distance from back of aluminum plate forward to back wall of outlet box,Critical,15 - 18,16.79,Leaves 16.79mm of rear plate clear so chassis bolt holes are completely uncovered
+Panel F: Outer Housing Bezel,[H17b],Box Vertical Gap off Plate,Vertical clearance between bottom surface of outlet box and near horizontal aluminum plate,Critical,8 - 10,9.1,Bottom of box sits ~9.1mm above aluminum plate (2.2mm above window bottom sill)

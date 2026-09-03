@@ -28,5 +28,7 @@
   "H16d_plate_rear_edge_height_Z_mm": 31.97,
   "H16e_wing_bottom_height_Z_mm": 34.0,
   "H16f_chin_extension_below_aluminum_plate_mm": 27.1,
-  "H16g_aluminum_plate_below_window_mm": 6.9
+  "H16g_aluminum_plate_below_window_mm": 6.9,
+  "H17a_back_of_box_to_plate_back_mm": 16.79,
+  "H17b_box_vertical_gap_off_plate_mm": 9.1
 }

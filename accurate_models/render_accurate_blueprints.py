@@ -285,13 +285,13 @@ def render_mated_blueprint():
     ax2.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt2 = (
-        "SIDE DEPTH & CLEARANCES:\n"
+        "CONFIRMED DEPTH & VERTICAL CLEARANCES:\n"
+        "• [H17a] Back of Box to Back of Plate: 16.79 mm (Holes Uncovered!)\n"
+        "• [H17b] Box Vertical Gap off Plate: 9.10 mm (Centered in Window)\n"
         "• [H7a] Side Wall Depth: 58.80 mm (Gentle 5.6° Wing Slope)\n"
-        "• Wings Flush Under Curved Roof Arch (Never Protrude Above)\n"
-        "• Aluminum Plate: 6.90 mm Below Window Aperture\n"
+        "• Aluminum Plate: 6.90 mm Below Window Aperture [H16g]\n"
         "• Internal Bend Angle: 84.13° (5.87° Upward Pitch)\n"
-        "• Connector Plugs into Rear Collar at Z = 44.65 mm\n"
-        "• Verified Seated Gap: 4.70 mm (17.67 mm Engagement)\n"
+        "• Connector Seated Gap: 4.70 mm (17.67 mm Engagement)\n"
         "• Cable Extends Rearward into Dash Cavity (-Y)"
     )
     ax2.text(0.03, 0.95, txt2, transform=ax2.transAxes, color='#38bdf8', fontsize=9.5, va='top',
@@ -313,11 +313,12 @@ def render_mated_blueprint():
     ax3.grid(True, linestyle='--', alpha=0.25, color='#38bdf8')
     
     txt3 = (
-        "HORIZONTAL SPAN & CLEARANCES:\n"
+        "HORIZONTAL SPAN & HOLE CLEARANCES:\n"
+        "• [H17a] 16.79 mm Clearance Ahead of Rear Plate Edge\n"
+        "• Chassis Bolt Holes Completely Exposed (Zero Box Overhang!)\n"
         "• [H11] Inner Wing Clear Span: 140.50 mm\n"
         "• Aluminum Floor Plate Width: 120.20 mm\n"
         "• [H11b] Space Between Wing & Aluminum: 10.15 mm\n"
-        "• Aluminum Floor Holes: 7.45x6.45 Oval + Ø 6.45 Round\n"
         "• Connector Placed on Left Flank (Clear of Chassis Bolt)"
     )
     ax3.text(0.03, 0.95, txt3, transform=ax3.transAxes, color='#38bdf8', fontsize=9.5, va='top',
