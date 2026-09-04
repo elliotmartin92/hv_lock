@@ -137,7 +137,7 @@ draw_dim(ax2, (0.0, 95.40), (-58.80, 95.40), "[H7a] Wing Depth: 58.80 mm", offse
 draw_dim(ax2, (0.0, 27.10), (-53.00, 27.10), "[H10] Aluminum Extension: 53.00 mm", offset=(0, -16), color='#38bdf8', fontsize=7.5)
 draw_dim(ax2, (-36.21, 59.20), (-40.91, 59.20), "[GAP] Seated Gap: 4.70 mm", offset=(0, 18), color='#f43f5e', fontsize=7.5)
 draw_dim(ax2, (-40.91, 75.00), (-95.51, 75.00), "[B7] Rigid Length: 54.60 mm", offset=(0, 6), color='#f97316', fontsize=8.0)
-draw_dim(ax2, (-95.51, 88.0), (-101.31, 88.0), "Keeper: 5.8 mm", offset=(0, 0), color='#22c55e', fontsize=7.0)
+draw_dim(ax2, (-95.51, 88.0), (-103.71, 88.0), "Keeper: 8.2 mm (Open U-Fork)", offset=(0, 0), color='#22c55e', fontsize=7.0)
 
 # Callout for extended toe under box
 draw_dim(ax2, (-36.21, 30.0), (-28.00, 30.0), "Toe Under Box: 8.21 mm", offset=(0, -10), color='#4ade80', fontsize=7.5)
@@ -148,8 +148,8 @@ ax2.annotate("UNDER-BOX TOE EXTENSION (Y = -28.0 mm)\n2.04 mm Vertical Gap Below
              color='#4ade80', fontsize=8.0, weight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#4ade80', lw=1.2))
 
-ax2.annotate("LOCKED SHOULDER PLANE (Y = -95.51 mm)\nZero Axial Pullout Possible!",
-             xy=(-95.51, 59.2), xytext=(-150.0, 42.0),
+ax2.annotate("LOCKED SHOULDER PLANE (Y = -95.51 mm)\nZero Axial Pullout Possible!\nKeeper Inverted U-Fork Drops from Above",
+             xy=(-95.51, 59.2), xytext=(-155.0, 42.0),
              arrowprops=dict(arrowstyle="->", color='#22c55e', lw=1.8),
              color='#22c55e', fontsize=8.0, weight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#22c55e', lw=1.2))
@@ -174,9 +174,9 @@ ax3.add_patch(c1)
 ax3.add_patch(c2)
 
 # Mark snap detent coordinates
-ax3.plot([5.20], [-98.01], 'o', color='#4ade80', markersize=6)
-ax3.plot([48.80], [-98.01], 'o', color='#4ade80', markersize=6)
-ax3.text(27.0, -112.0, "Precision Snap Detents (X = 5.20 & 48.80 mm)\nTrack Female Pocket (R = 2.2 mm) + Keeper Male Bump (R = 1.8 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
+ax3.plot([3.70], [-99.61], 'o', color='#4ade80', markersize=6)
+ax3.plot([50.30], [-99.61], 'o', color='#4ade80', markersize=6)
+ax3.text(27.0, -114.0, "Precision Snap Detents (X = 3.70 & 50.30 mm, Y = -99.61 mm)\nTrack Female Pocket (R = 2.2 mm) + Keeper Male Bump (R = 1.8 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
 
 ax3.set_xlim(-95, 95)
 ax3.set_ylim(-190, 25)

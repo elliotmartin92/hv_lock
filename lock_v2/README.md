@@ -14,16 +14,17 @@ In direct response to mechanical fatigue, installation ergonomics, and physical 
    - **Full Latch & CPA Access**: With zero top roof, the connector latch lever and red CPA slider remain 100% unobstructed and accessible.
    - **Massive Dual Guide Towers**: The cradle upright towers flanking the connector are **\(12.0\text{ mm}\) thick solid PCTG** on each side with \(R = 4.0\text{ mm}\) rounded corners, eliminating any thin, fragile, or flexing faces.
 
-2. **Heavy-Duty Slide-In Retention Keeper (\(8.2\text{ mm}\) Solid PCTG Gate)**:
-   - The retention is provided by the slide-in **Keeper**, which drops vertically downward into precision guide tracks on the towers.
-   - **Robust Thickness**: Upgraded to **\(8.2\text{ mm}\) solid PCTG thickness** (with a **\(12.2\text{ mm}\) thick** ergonomic thumb grip tab with tactile ribs).
-   - **Inverted U-Slot**: Features a \(\varnothing 19.0\text{ mm}\) U-slot with a \(45^\circ\) lead-in chamfer that slides down over the \(\varnothing 17.0\text{ mm}\) rubber cable boot.
-   - **Positive Axial Lock**: The flat front face of the keeper bears directly against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout.
+2. **Heavy-Duty Slide-In Retention Keeper (100% Open Inverted U-Fork • Genus = 0)**:
+   - **Zero Closed Holes**: The keeper is a **100% open-bottom inverted U-fork** (\(\text{Genus} = 0\)). The bottom of the keeper is completely wide open with zero bottom bridge or floor.
+   - **Drop-In Assembly**: Neither the connector head nor the cable needs to be threaded through any closed hole. Once the orange connector and cable drop into the open-top base bracket saddle, the keeper drops straight down over the cable boot from above.
+   - **Robust Thickness**: **\(8.2\text{ mm}\) solid PCTG thickness** with an integrated **\(36.0\text{ mm}\) wide** ergonomic thumb grip tab.
+   - **Generous Cable Throat**: Features a **\(34.0\text{ mm}\) wide inverted U-slot** that clears the flared \(29.0\text{ mm}\) rubber strain relief boot with generous air gaps and \(0.000000\text{ mm}^3\) collision volume.
+   - **Positive Axial Lock**: The flat front face of the keeper bears squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout.
    - **Precision Aligned Snap Detents**:
-     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = 5.20\text{ mm}\) and \(X = 48.80\text{ mm}\), \(Y = -98.01\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
-     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = 5.50\text{ mm}\) and \(X = 48.50\text{ mm}\), \(Y = -98.01\text{ mm}\), \(Z = 56.00\text{ mm}\).
+     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = 3.70\text{ mm}\) and \(X = 50.30\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
+     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = 4.00\text{ mm}\) and \(X = 50.00\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
      * **0.000 mm Alignment Error**: The detents line up identically in \(Y\) and \(Z\), sliding down smoothly and snapping together with a tactile "CLICK" that prevents vibration walkout.
-   - **Toolless Release**: Simply pull straight up on the textured thumb tab to release the keeper for vehicle servicing.
+   - **Toolless Release**: Simply pull straight up on the thumb tab to release the keeper for vehicle servicing.
 
 3. **Accommodates OEM M6 Flanged Nuts with Built-In \(\varnothing 17.25\text{ mm}\) Washers**:
    - Precision counterbore seats of **\(\varnothing 18.50\text{ mm}\)** (\(0.625\text{ mm}\) radial clearance) allow OEM flanged nuts with their integrated \(\varnothing 17.25\text{ mm}\) washer to seat completely flush without edge binding.
