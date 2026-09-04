@@ -171,31 +171,43 @@ def build_base_bracket():
     m_base = m_base_local.transform(M_plate)
 
     # -------------------------------------------------------------------------
-    # B. ELEVATED CONTINUOUS WISHBONE RISER (LEFT-FLANK ROUTING)
+    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (THICK, SMOOTH & CONTINUOUS)
     # -------------------------------------------------------------------------
-    p_cent_loc = [X_CENT + 5.0, v_cent + 9.0, 2.80 + 5.0]
-    p_oval_loc = [X_OVAL + 8.0, v_oval + 9.0, 2.80 + 5.0]
-    p_mid_loc  = [4.0, 65.0, 2.80 + 6.0]
-    p_spine_loc = [5.0, 82.0, 2.80 + 7.5]
-    p_cradle_loc = [6.0, 92.0, 2.80 + 10.0]
+    # Arm from Central Bolt Boss: Broad buttress rising from the central bolt boss
+    s_cent_1 = m3d.Manifold.sphere(radius=7.5, circular_segments=24).translate(p_loc_to_world([0.0, v_cent + 8.0, FOOT_THICK + 5.0]))
+    s_cent_2 = m3d.Manifold.sphere(radius=8.0, circular_segments=24).translate(p_loc_to_world([-4.0, 52.0, FOOT_THICK + 6.5]))
 
-    p_cent_w = p_loc_to_world(p_cent_loc)
-    p_oval_w = p_loc_to_world(p_oval_loc)
-    p_mid_w  = p_loc_to_world(p_mid_loc)
-    p_spine_w = p_loc_to_world(p_spine_loc)
-    p_cradle_w = p_loc_to_world(p_cradle_loc)
+    # Arm from Oval Bolt Boss: Broad buttress rising from the outer bolt boss
+    s_oval_1 = m3d.Manifold.sphere(radius=7.5, circular_segments=24).translate(p_loc_to_world([-30.0, v_oval + 8.0, FOOT_THICK + 5.0]))
+    s_oval_2 = m3d.Manifold.sphere(radius=8.0, circular_segments=24).translate(p_loc_to_world([-18.0, 54.0, FOOT_THICK + 6.5]))
 
-    trunk_lower = make_capsule(p_cent_w, p_mid_w, r1=5.0, r2=6.0)
-    stiffener_arm = make_capsule(p_oval_w, p_mid_w, r1=5.0, r2=6.0)
-    spine_mid = make_capsule(p_mid_w, p_spine_w, r1=6.0, r2=6.5)
-    spine_upper = make_capsule(p_spine_w, p_cradle_w, r1=6.5, r2=7.0)
+    # Mid-Span Broad Bridge & Gusset Web (Fills the entire span between the two bolt bosses):
+    s_mid_l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-16.0, 66.0, FOOT_THICK + 8.0]))
+    s_mid_r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-4.0, 66.0, FOOT_THICK + 8.0]))
 
-    web_s1 = m3d.Manifold.sphere(radius=4.0, circular_segments=20).translate(p_cent_w)
-    web_s2 = m3d.Manifold.sphere(radius=4.0, circular_segments=20).translate(p_oval_w)
-    web_s3 = m3d.Manifold.sphere(radius=4.5, circular_segments=20).translate(p_mid_w)
-    gusset_web = (web_s1 + web_s2 + web_s3).hull()
+    # Continuous Triangular Web root between bolt bosses:
+    s_web_root = m3d.Manifold.sphere(radius=5.5, circular_segments=20).translate(p_loc_to_world([-15.0, 44.0, FOOT_THICK + 3.0]))
 
-    riser_truss = trunk_lower + stiffener_arm + spine_mid + spine_upper + gusset_web
+    # Upper Spine (Broad structural beam running X in [-14.0, 0.0] mm):
+    s_spine_1l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-12.0, 78.0, FOOT_THICK + 9.5]))
+    s_spine_1r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-2.0, 78.0, FOOT_THICK + 9.5]))
+
+    s_spine_2l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-8.0, 88.0, FOOT_THICK + 11.0]))
+    s_spine_2r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([0.0, 88.0, FOOT_THICK + 11.0]))
+
+    # Cradle Interface Flared Nodes (sweeps smoothly into the Left Tower and Cradle Floor):
+    s_cradle_l = m3d.Manifold.sphere(radius=9.0, circular_segments=24).translate(p_loc_to_world([4.0, 94.0, FOOT_THICK + 12.0]))
+    s_cradle_root = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-2.0, 94.0, FOOT_THICK + 12.0]))
+
+    # Smooth continuous chained organic hulls:
+    arm_cent = (s_cent_1 + s_cent_2 + s_mid_r).hull()
+    arm_oval = (s_oval_1 + s_oval_2 + s_mid_l).hull()
+    valley_web = (s_cent_1 + s_oval_1 + s_web_root + s_mid_l + s_mid_r).hull()
+    mid_spine = (s_mid_l + s_mid_r + s_spine_1l + s_spine_1r).hull()
+    upper_spine = (s_spine_1l + s_spine_1r + s_spine_2l + s_spine_2r).hull()
+    cradle_transition = (s_spine_2l + s_spine_2r + s_cradle_root + s_cradle_l).hull()
+
+    riser_truss = arm_cent + arm_oval + valley_web + mid_spine + upper_spine + cradle_transition
 
     # -------------------------------------------------------------------------
     # C. COMPLETELY OPEN-TOP CONNECTOR RETENTION CRADLE (NO ROOF, NO CLOSED CIRCLES)
