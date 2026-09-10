@@ -92,6 +92,7 @@ SLOT_W = 7.20                # Bolt clearance through-hole
 NUT_WASHER_DIA = 17.25       # Actual hardware built-in washer diameter
 WASHER_D = 18.50             # Counterbore diameter providing 0.625 mm radial clearance
 FOOT_THICK = 2.80            # Flange thickness under nut & under box (leaves >= 2.0 mm vertical gap)
+BOSS_HEIGHT = 8.50           # Raised heavy-duty bolt boss height (was 2.80 mm thin wafer)
 Y_FRONT_TOE = -28.00         # Extended forward toe under box (8.21 mm extension under box)
 
 # Track & Detent Geometry
@@ -149,65 +150,101 @@ def build_base_bracket():
     print("Designing continuous organic lock_v2_base_bracket (Open-Top U-Saddle)...")
 
     # -------------------------------------------------------------------------
-    # A. CONTINUOUS EXTENDED BASE FLANGE (Resting on 5.87 deg inclined plate)
+    # A. CONTINUOUS BASE FLANGE WITH RAISED BOLT BOSSES (8.50 mm HEAVY-DUTY TURRETS)
     # -------------------------------------------------------------------------
     v_cent = abs(Y_HOLE_CENT - Y_FRONT_ROOT) / COS_T # 36.883 mm
     v_oval = abs(Y_HOLE_OVAL - Y_FRONT_ROOT) / COS_T # 37.185 mm
     v_front_toe = (Y_FRONT_ROOT - Y_FRONT_TOE) / COS_T # 22.52 mm
 
-    boss1_2d = m3d.CrossSection.circle(14.0, circular_segments=36).translate([X_CENT, v_cent])
-    boss2_2d = m3d.CrossSection.circle(14.5, circular_segments=36).translate([X_OVAL, v_oval])
+    # 1. Base Footprint extruded to full BOSS_HEIGHT = 8.50 mm in local plate frame:
+    boss1_2d = m3d.CrossSection.circle(15.0, circular_segments=36).translate([X_CENT, v_cent])
+    boss2_2d = m3d.CrossSection.circle(15.5, circular_segments=36).translate([X_OVAL, v_oval])
 
-    toe_poly = np.array([
-        [X_OVAL - 11.0, v_front_toe],
-        [X_CENT + 11.0, v_front_toe],
-        [X_CENT + 11.0, v_cent + 8.0],
-        [X_OVAL - 11.0, v_oval + 8.0]
+    foot_poly = np.array([
+        [X_OVAL - 11.5, v_front_toe],
+        [X_CENT + 11.5, v_front_toe],
+        [X_CENT + 11.5, v_cent + 12.0],
+        [X_OVAL - 11.5, v_oval + 12.0]
     ])
-    toe_2d = m3d.CrossSection([toe_poly])
+    foot_2d = (boss1_2d + boss2_2d + m3d.CrossSection([foot_poly])).offset(3.0, m3d.JoinType.Round).offset(-3.0, m3d.JoinType.Round)
+    m_foot_full = foot_2d.extrude(BOSS_HEIGHT)
 
-    base_2d = (boss1_2d + boss2_2d + toe_2d).offset(3.0, m3d.JoinType.Round).offset(-3.0, m3d.JoinType.Round)
-    m_base_local = base_2d.extrude(FOOT_THICK)
-    m_base = m_base_local.transform(M_plate)
+    # 2. Smooth 45-degree ramp tool in v-z plane:
+    # Cuts from z = 2.80 mm under box (v <= 30.5 mm) to full boss height (z = 8.50 mm at v = 35.5 mm)
+    cut_poly = np.array([
+        [0.0, FOOT_THICK],
+        [30.50, FOOT_THICK],
+        [35.50, BOSS_HEIGHT],
+        [35.50, 25.00],
+        [0.0, 25.00]
+    ])
+    cut_cs = m3d.CrossSection([cut_poly]).offset(1.2, m3d.JoinType.Round).offset(-1.2, m3d.JoinType.Round)
+    cut_tool = cut_cs.extrude(160.0).translate([0, 0, -80.0])
+    R_cut = np.array([
+        [0, 0, 1, 0],
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 0, 1]
+    ])
+    cut_tool = cut_tool.transform(R_cut[:3, :])
+    m_foot_local = m_foot_full - cut_tool
 
     # -------------------------------------------------------------------------
-    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (THICK, SMOOTH & CONTINUOUS)
+    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (UNIFIED BOLT INTERFACE & CONTINUOUS DECK)
     # -------------------------------------------------------------------------
-    # Arm from Central Bolt Boss: Broad buttress rising from the central bolt boss
-    s_cent_1 = m3d.Manifold.sphere(radius=7.5, circular_segments=24).translate(p_loc_to_world([0.0, v_cent + 8.0, FOOT_THICK + 5.0]))
-    s_cent_2 = m3d.Manifold.sphere(radius=8.0, circular_segments=24).translate(p_loc_to_world([-4.0, 52.0, FOOT_THICK + 6.5]))
+    def sphere_loc(x, v, z, r, segs=24):
+        return m3d.Manifold.sphere(radius=r, circular_segments=segs).translate([x, v, z])
 
-    # Arm from Oval Bolt Boss: Broad buttress rising from the outer bolt boss
-    s_oval_1 = m3d.Manifold.sphere(radius=7.5, circular_segments=24).translate(p_loc_to_world([-30.0, v_oval + 8.0, FOOT_THICK + 5.0]))
-    s_oval_2 = m3d.Manifold.sphere(radius=8.0, circular_segments=24).translate(p_loc_to_world([-18.0, 54.0, FOOT_THICK + 6.5]))
+    # 1. Bolt Foundation Nodes: Envelop the 8.50 mm bolt bosses directly into the spine
+    s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 5.0, 8.5, 8.5)
+    s_oval_flank = sphere_loc(X_OVAL - 2.0, v_oval + 4.0, 7.5, 7.5)
 
-    # Mid-Span Broad Bridge & Gusset Web (Fills the entire span between the two bolt bosses):
-    s_mid_l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-16.0, 66.0, FOOT_THICK + 8.0]))
-    s_mid_r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-4.0, 66.0, FOOT_THICK + 8.0]))
+    s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 6.0, 8.5, 8.5)
+    s_cent_flank = sphere_loc(X_CENT + 1.0, v_cent + 7.0, 7.5, 7.5)
 
-    # Continuous Triangular Web root between bolt bosses:
-    s_web_root = m3d.Manifold.sphere(radius=5.5, circular_segments=20).translate(p_loc_to_world([-15.0, 44.0, FOOT_THICK + 3.0]))
+    # 2. Continuous Triangular Web bridging the entire 45 mm span between bolt bosses
+    s_web_1 = sphere_loc(-28.0, 44.0, 8.0, 8.0)
+    s_web_2 = sphere_loc(-18.0, 45.0, 8.5, 8.5)
+    s_web_3 = sphere_loc(-9.0, 44.0, 8.0, 8.0)
 
-    # Upper Spine (Broad structural beam running X in [-14.0, 0.0] mm):
-    s_spine_1l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-12.0, 78.0, FOOT_THICK + 9.5]))
-    s_spine_1r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-2.0, 78.0, FOOT_THICK + 9.5]))
+    # 3. Mid-Span Convergence Nodes
+    s_mid_l1 = sphere_loc(-22.0, 54.0, 11.5, 8.5)
+    s_mid_m1 = sphere_loc(-12.0, 55.0, 11.5, 8.5)
+    s_mid_r1 = sphere_loc(-3.0, 54.0, 11.5, 8.5)
 
-    s_spine_2l = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-8.0, 88.0, FOOT_THICK + 11.0]))
-    s_spine_2r = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([0.0, 88.0, FOOT_THICK + 11.0]))
+    s_mid_l2 = sphere_loc(-16.0, 66.0, 15.5, 8.5)
+    s_mid_r2 = sphere_loc(-3.0, 66.0, 15.5, 8.5)
 
-    # Cradle Interface Flared Nodes (sweeps smoothly into the Left Tower and Cradle Floor):
-    s_cradle_l = m3d.Manifold.sphere(radius=9.0, circular_segments=24).translate(p_loc_to_world([4.0, 94.0, FOOT_THICK + 12.0]))
-    s_cradle_root = m3d.Manifold.sphere(radius=8.5, circular_segments=24).translate(p_loc_to_world([-2.0, 94.0, FOOT_THICK + 12.0]))
+    # 4. Upper Spine Nodes (Broad beam along left flank of connector)
+    s_spine_1l = sphere_loc(-12.0, 78.0, 19.5, 8.5)
+    s_spine_1r = sphere_loc(-1.0, 78.0, 19.5, 8.5)
 
-    # Smooth continuous chained organic hulls:
-    arm_cent = (s_cent_1 + s_cent_2 + s_mid_r).hull()
-    arm_oval = (s_oval_1 + s_oval_2 + s_mid_l).hull()
-    valley_web = (s_cent_1 + s_oval_1 + s_web_root + s_mid_l + s_mid_r).hull()
-    mid_spine = (s_mid_l + s_mid_r + s_spine_1l + s_spine_1r).hull()
-    upper_spine = (s_spine_1l + s_spine_1r + s_spine_2l + s_spine_2r).hull()
-    cradle_transition = (s_spine_2l + s_spine_2r + s_cradle_root + s_cradle_l).hull()
+    s_spine_2l = sphere_loc(-8.0, 88.0, 23.5, 8.5)
+    s_spine_2r = sphere_loc(+1.0, 88.0, 23.5, 8.5)
 
-    riser_truss = arm_cent + arm_oval + valley_web + mid_spine + upper_spine + cradle_transition
+    # 5. Cradle Interface Transition Nodes
+    s_cradle_root = sphere_loc(-2.0, 93.0, 26.5, 8.5)
+    s_cradle_l = sphere_loc(+4.0, 93.0, 26.5, 9.5)
+
+    # Continuous Chained Hulls forming a monocoque truss:
+    h_bolt_deck = (s_oval_flank + s_oval_root + s_web_1 + s_web_2 + s_web_3 + s_cent_root + s_cent_flank).hull()
+    h_arm_oval = (s_oval_root + s_web_1 + s_mid_l1).hull()
+    h_arm_cent = (s_cent_root + s_web_3 + s_mid_r1).hull()
+    h_web_mid1 = (s_web_1 + s_web_2 + s_web_3 + s_mid_l1 + s_mid_m1 + s_mid_r1).hull()
+
+    h_mid_span = (s_mid_l1 + s_mid_m1 + s_mid_r1 + s_mid_l2 + s_mid_r2).hull()
+    h_upper1 = (s_mid_l2 + s_mid_r2 + s_spine_1l + s_spine_1r).hull()
+    h_upper2 = (s_spine_1l + s_spine_1r + s_spine_2l + s_spine_2r).hull()
+    h_cradle = (s_spine_2l + s_spine_2r + s_cradle_root + s_cradle_l).hull()
+
+    spine_local = h_bolt_deck + h_arm_oval + h_arm_cent + h_web_mid1 + h_mid_span + h_upper1 + h_upper2 + h_cradle
+
+    # Clip anything below z_local = 0 to guarantee 100% planar bottom:
+    sub_bottom = m3d.Manifold.cube([200.0, 200.0, 50.0], center=True).translate([-15.0, 50.0, -25.0])
+    spine_local = spine_local - sub_bottom
+
+    bracket_local = m_foot_local + spine_local
+    bracket_world = bracket_local.transform(M_plate)
 
     # -------------------------------------------------------------------------
     # C. COMPLETELY OPEN-TOP CONNECTOR RETENTION CRADLE (NO ROOF, NO CLOSED CIRCLES)
@@ -218,6 +255,8 @@ def build_base_bracket():
 
     outer_cs = m3d.CrossSection.square([cradle_w - 8.0, cradle_d - 8.0], center=True).offset(4.0, m3d.JoinType.Round)
     cradle_outer = outer_cs.extrude(cradle_h).translate([X_CONN, Y_TRACK_CENTER, 45.0])
+
+    bracket = bracket_world + cradle_outer
 
     # 1. Main connector body pocket (OPEN ALL THE WAY UP THROUGH THE TOP!):
     conn_pocket = m3d.Manifold.cube([38.5, 60.0, 80.0], center=True).translate([X_CONN, Y_SHOULDER + 30.0, 49.0 + 40.0])
@@ -239,8 +278,6 @@ def build_base_bracket():
     lead_in_l = m3d.Manifold.cylinder(radius_low=1.2, radius_high=1.2, height=30.0, circular_segments=16).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT])
     lead_in_r = m3d.Manifold.cylinder(radius_low=1.2, radius_high=1.2, height=30.0, circular_segments=16).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT])
 
-    # Merge into monolithic continuous solid:
-    bracket = m_base + riser_truss + cradle_outer
     bracket = bracket - conn_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
 
     # -------------------------------------------------------------------------
@@ -318,7 +355,7 @@ def build_keeper():
 # ==============================================================================
 # 4. BUILD CONTINUOUS 1-PIECE MONOLITHIC LOCK (THROUGH-BOLTED)
 # ==============================================================================
-def build_monolithic_lock():
+def build_monolithic_lock(m_base=None, m_keeper=None):
     """
     Constructs a 1-piece alternative lock:
     - Both M6 bolts pass completely THROUGH the lock.
@@ -326,15 +363,18 @@ def build_monolithic_lock():
     - Side-entry horseshoe collar at rear shoulder so it installs directly over the cable.
     """
     print("Designing continuous lock_v2_1piece_monolithic...")
-    base = build_base_bracket()
-    keeper = build_keeper()
+    if m_base is None:
+        base_mesh = build_base_bracket()
+        m_base = m3d.Manifold(m3d.Mesh(vert_properties=base_mesh.vertices.astype(np.float32), tri_verts=base_mesh.faces.astype(np.uint32)))
+    if m_keeper is None:
+        keeper_mesh = build_keeper()
+        m_keeper = m3d.Manifold(m3d.Mesh(vert_properties=keeper_mesh.vertices.astype(np.float32), tri_verts=keeper_mesh.faces.astype(np.uint32)))
 
-    mono = base.union(keeper, engine='manifold')
-    side_slot = trimesh.creation.box(extents=[36.0, 16.0, 25.0])
-    side_slot.apply_translation([X_CONN + 18.0, Y_TRACK_CENTER, Z_CONN])
+    mono_m = m_base + m_keeper
+    side_slot = m3d.Manifold.cube([36.0, 16.0, 25.0], center=True).translate([X_CONN + 18.0, Y_TRACK_CENTER, Z_CONN])
+    mono_m = mono_m - side_slot
 
-    mono = mono.difference(side_slot, engine='manifold')
-    mono.visual.vertex_colors = [168, 85, 247, 255] # Royal purple
+    mono = manifold_to_trimesh(mono_m, color=[168, 85, 247, 255])
     return mono
 
 # ==============================================================================

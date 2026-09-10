@@ -37,11 +37,12 @@ In direct response to mechanical fatigue, installation ergonomics, and physical 
    - The foot thickness under the box is calibrated to \(2.80\text{ mm}\), leaving a verified **\(2.04\text{ mm}\) vertical air gap** below the flat underside of the outlet box (\(Z = 36.20\text{ mm}\)).
    - Acts as a continuous cantilever lever arm that prevents bracket tipping and transfers compressive clamping reaction directly into the vehicle floor plate.
 
-5. **Heavy-Duty Organic Monocoque Riser Backbone (Smooth, Contoured & Thick)**:
-   - **Eliminates Slender Tube Joints**: Upgraded from slender \(10\text{ mm}\) capsule tubes to a massive, continuous triangulated monocoque truss with broad buttresses rising directly from both bolt bosses (\(R = 7.5 - 8.5\text{ mm}\), thickness \(15 - 22\text{ mm}\)).
-   - **Continuous Solid Gusset Web**: Completely fills the triangular valley between the central and outer bolt bosses, transferring cantilever bending loads across the entire \(44.90\text{ mm}\) bolt span.
-   - **Smooth Flared Transitions**: Sweeps smoothly along the safe left corridor (\(X \le 0.0\text{ mm}\)) into the left tower and cradle floor with broad tangent organic fillets, eliminating all thin necks, sharp steps, and stress concentrations.
-   - **44% Increase in Solid Material**: Solid bracket volume increased from \(27,000\text{ mm}^3\) to **\(38,867\text{ mm}^3\)**, providing extreme rigidity and fatigue life under cyclic vehicle vibrations while maintaining exactly **\(0.000000\text{ mm}^3\) collision**.
+5. **Unified Bolt-to-Spine Monocoque Transition (8.50 mm Heavy-Duty Turrets & Continuous Deck)**:
+   - **Raised \(8.50\text{ mm}\) Bolt Turrets with \(6.0\text{ mm}\) Deep Captive Sockets**: The bolt interface is no longer a flat wafer. Both M6 bolt bosses are raised to a substantial \(8.50\text{ mm}\) turret height, fully enclosing the M6 flanged nut (\(\sim 6.3\text{ mm}\) tall) in a deep, recessed \(\varnothing 18.50\text{ mm}\) counterbore pocket.
+   - **Eliminates Abrupt Steps & Narrow Necks**: The riser spine does not start behind the bolt holes as an isolated separate structure. Instead, the spine foundation envelops the entire rear and flanks of the bolt bosses, creating a smooth, sweeping automotive-grade structural casting flow.
+   - **Continuous Solid Gusset Deck**: Completely bridges the entire \(44.90\text{ mm}\) span between the central and oval bolt bosses with a monolithic, thick triangulated web that transfers clamping preload directly into the spine.
+   - **Smooth Filleted Ramp Transition**: A continuous \(45^\circ\) tangent S-curve ramp smoothly transitions from the \(2.80\text{ mm}\) under-box compression toe to the \(8.50\text{ mm}\) bolt bosses and rising spine.
+   - **Substantial Solid Volume**: Bracket volume is now **\(43,530\text{ mm}^3\)** (a 61% increase over early prototypes), providing maximum rigidity and fatigue resistance under severe vehicle vibration while maintaining strictly **\(0.000000\text{ mm}^3\) collision**.
 
 ```text
                VEHICLE INTERIOR (+Y)
