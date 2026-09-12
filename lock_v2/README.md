@@ -10,19 +10,23 @@
 In direct response to mechanical fatigue, installation ergonomics, and physical vehicle clearances:
 1. **100% Open-Top U-Saddle (Zero Roof, Zero Closed Circles)**:
    - **No Closed Circles**: The base bracket cradle is completely open through the top and rear. The connector does **not** need to be threaded through any closed hole (which is physically impossible with a factory-wired vehicle cable).
-   - **Direct Drop-In Installation**: The orange connector body nests directly into the lower cradle from above, resting securely on a solid PCTG saddle bed.
+   - **Direct Drop-In Installation**: The orange connector body nests directly into the lower cradle from above, resting securely on a solid PCTG saddle bed at \(Z = 52.10\text{ mm}\).
+   - **Snug 30.0 mm Locating Channel**: The cradle guide channel ahead of the keeper is calibrated to **\(30.0\text{ mm}\) inside width** (\(0.50\text{ mm}\) precision slip-fit per side around the \(29.0\text{ mm}\) connector handle), completely eliminating twist, lateral play, and vibration rattle.
    - **Full Latch & CPA Access**: With zero top roof, the connector latch lever and red CPA slider remain 100% unobstructed and accessible.
-   - **Massive Dual Guide Towers**: The cradle upright towers flanking the connector are **\(12.0\text{ mm}\) thick solid PCTG** on each side with \(R = 4.0\text{ mm}\) rounded corners, eliminating any thin, fragile, or flexing faces.
+   - **Massive Dual Guide Towers**: The cradle upright towers flanking the connector are **\(11.0 - 16.0\text{ mm}\) thick solid PCTG** on each side with \(R = 4.0\text{ mm}\) rounded corners, eliminating any thin, fragile, or flexing faces.
 
 2. **Heavy-Duty Slide-In Retention Keeper (100% Open Inverted U-Fork • Genus = 0)**:
    - **Zero Closed Holes**: The keeper is a **100% open-bottom inverted U-fork** (\(\text{Genus} = 0\)). The bottom of the keeper is completely wide open with zero bottom bridge or floor.
    - **Drop-In Assembly**: Neither the connector head nor the cable needs to be threaded through any closed hole. Once the orange connector and cable drop into the open-top base bracket saddle, the keeper drops straight down over the cable boot from above.
    - **Robust Thickness**: **\(8.2\text{ mm}\) solid PCTG thickness** with an integrated **\(36.0\text{ mm}\) wide** ergonomic thumb grip tab.
-   - **Generous Cable Throat**: Features a **\(34.0\text{ mm}\) wide inverted U-slot** that clears the flared \(29.0\text{ mm}\) rubber strain relief boot with generous air gaps and \(0.000000\text{ mm}^3\) collision volume.
-   - **Positive Axial Lock**: The flat front face of the keeper bears squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout.
+   - **Calibrated Cable Throat**: Features a **\(19.0\text{ mm}\) wide inverted U-slot** centered at \(X = 24.60\text{ mm}\) that clears the \(\varnothing 17.0\text{ mm}\) corrugated conduit with \(+1.0\text{ mm}\) radial air gap and \(0.000000\text{ mm}^3\) collision volume.
+   - **Bilateral 5.0 mm Bearing Shoulders (1.00 Symmetry Ratio)**:
+     * Left Shoulder: Bears against connector shoulder from \(X = 10.10\text{ mm}\) to \(15.10\text{ mm}\) (\(5.00\text{ mm}\) solid contact).
+     * Right Shoulder: Bears against connector shoulder from \(X = 34.10\text{ mm}\) to \(39.10\text{ mm}\) (\(5.00\text{ mm}\) solid contact).
+     * Symmetrical Bearing Area: **\(> 160\text{ mm}^2\)** of solid PCTG bearing squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout or cocking.
    - **Precision Aligned Snap Detents**:
-     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = 3.70\text{ mm}\) and \(X = 50.30\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
-     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = 4.00\text{ mm}\) and \(X = 50.00\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
+     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = 1.30\text{ mm}\) and \(X = 47.90\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
+     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = 1.70\text{ mm}\) and \(X = 47.50\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
      * **0.000 mm Alignment Error**: The detents line up identically in \(Y\) and \(Z\), sliding down smoothly and snapping together with a tactile "CLICK" that prevents vibration walkout.
    - **Toolless Release**: Simply pull straight up on the thumb tab to release the keeper for vehicle servicing.
 
@@ -96,8 +100,11 @@ All geometry strictly references [`accurate_models/README_AI.md`](file:///c:/Use
 | **Aluminum Plate Angle `[H16c]`** | **\(5.87^\circ\)** upward pitch | **\(5.87^\circ\)** matched base foot pitch | 100% flush bearing contact |
 | **Connector Seated Gap `[GAP]`** | \(4.70\text{ mm}\) clearance | Leaves \(4.70\text{ mm}\) undisturbed | Factory seal compression maintained |
 | **Connector Rigid Length `[B7]`**| \(54.60\text{ mm}\) | Shoulder plane locked at **\(Y = -95.51\text{ mm}\)** | Positive mechanical axial stop |
+| **Shoulder Bearing Overlap** | None (loose in prototype) | **2x \(5.00\text{ mm}\) Bilateral Shoulders** (\(>160\text{ mm}^2\)) | Symmetrical balanced axial retention |
+| **Bilateral Symmetry Ratio** | Asymmetric in early build | **1.000 (Exact 50/50 load sharing)** | Eliminates cantilever yaw / twisting |
+| **Cradle Guide Channel** | \(38.5\text{ mm}\) wide (\(9.5\text{ mm}\) slop) | **\(30.0\text{ mm}\) Snug Channel** (\(0.50\text{ mm}\) slip-fit) | Prevents side-to-side wiggle and rattle |
 | **Cable Boot Clearance** | \(\varnothing 17.00\text{ mm}\) rubber boot | \(\varnothing 19.00\text{ mm}\) U-slot (\(1.0\text{ mm}\) radial air gap) | Smooth lead-in, zero cable chafing |
-| **Outer Housing Wings** | Inner span \(140.50\text{ mm}\) \([H11]\) | Lock width \(105.10\text{ mm}\) (\(>17\text{ mm}\) air gap to wings) | Ample lateral clearance |
+| **Outer Housing Wings** | Inner span \(140.50\text{ mm}\) \([H11]\) | Lock width \(105.71\text{ mm}\) (\(>17\text{ mm}\) air gap to wings) | Ample lateral clearance |
 | **Roof Arch Margin** | Roof arch apex at \(Z = 95.40\text{ mm}\) | Max lock height \(Z = 81.00\text{ mm}\) (\(14.40\text{ mm}\) clearance) | Fits easily inside dash aperture |
 
 ---

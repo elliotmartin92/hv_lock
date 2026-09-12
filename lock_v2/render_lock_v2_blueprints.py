@@ -20,7 +20,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
 accurate_models_dir = os.path.join(os.path.dirname(target_dir), "accurate_models")
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\8d2b65bc-73dc-42b9-9487-84e2e95bdab0"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\92936917-2f7b-4fba-844f-e541378233d0"
 
 print("Loading CAD meshes for technical blueprint generation...")
 h_mesh = trimesh.load(os.path.join(accurate_models_dir, "mated_outer_housing.stl"))
@@ -107,9 +107,8 @@ ax1.set_xlabel("Screen Width (mm: Left = Driver/Connector, Right = Passenger/Out
 ax1.set_ylabel("Height Z (mm: Chin Tip = 0.0, Roof Rim = 95.40)", color='#94a3b8', fontsize=8.5)
 
 draw_dim(ax1, (-71.15, 95.40), (71.15, 95.40), "[H1] Total Width: 142.30 mm", offset=(0, 10), color='#facc15', fontsize=8.0)
-draw_dim(ax1, (-5.275, 34.0), (39.625, 34.0), "[H15e] Dual Bolt Span: 44.90 mm", offset=(0, -8), color='#4ade80', fontsize=8.0)
-draw_dim(ax1, (-27.0 - 18.05, 59.20), (-27.0 + 18.05, 59.20), "Connector Width: 36.10 mm", offset=(0, -16), color='#f97316', fontsize=7.2)
-draw_dim(ax1, (-50.0, 75.20), (-4.0, 75.20), "Lock v2 Cradle Width: 46.0 mm", offset=(0, 16), color='#38bdf8', fontsize=7.5)
+draw_dim(ax1, (-24.60 - 14.5, 50.0), (-24.60 + 14.5, 50.0), "Handle Width: 29.0 mm (Snug 30.0mm Pocket)", offset=(0, -14), color='#f97316', fontsize=7.2)
+draw_dim(ax1, (-24.60 - 9.5, 73.0), (-24.60 + 9.5, 73.0), "Keeper Throat: 19.0 mm (2x 5.0mm Shoulders)", offset=(0, 14), color='#4ade80', fontsize=7.2)
 
 ax1.text(-50, 110, "SCREEN LEFT: CONNECTOR & LOCK V2", color='#38bdf8', fontsize=8.5, weight='bold', ha='center')
 ax1.text(50, 110, "SCREEN RIGHT: AC 120V OUTLET", color='#94a3b8', fontsize=8.5, weight='bold', ha='center')

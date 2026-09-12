@@ -185,11 +185,9 @@ def build_connector_model():
     meshes.append(handle)
     
     # 9. Black Dual-Snap Retention Clamp Collar (Z in [-66.60, -54.60])
-    clamp = create_box([28.0, 20.0, 12.0], [0, 0, -60.60])
-    snap_win1 = create_box([4.0, 21.0, 5.0], [-13.0, 0, -60.60])
-    snap_win2 = create_box([4.0, 21.0, 5.0], [13.0, 0, -60.60])
-    clamp = clamp.difference(snap_win1, engine='manifold')
-    clamp = clamp.difference(snap_win2, engine='manifold')
+    # Secures the corrugated cable loom (diameter 17.0 mm) to the handle exit
+    clamp = trimesh.creation.cylinder(radius=8.5, height=12.0, sections=32)
+    clamp.apply_translation([0, 0, -60.60])
     clamp.visual.vertex_colors = [30, 41, 59, 255]
     meshes.append(clamp)
     
