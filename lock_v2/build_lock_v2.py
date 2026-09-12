@@ -97,10 +97,11 @@ FOOT_THICK = 2.80            # 100% Flat flange thickness starting at bolt depre
 BOSS_HEIGHT = FOOT_THICK     # Uniform flat planar thickness (eliminates raised bosses / turrets)
 Y_FRONT_TOE = -28.00         # Extended forward toe under box (8.21 mm extension under box)
 
-# Track & Detent Geometry
-KEEPER_W = 46.00             # Width of slide keeper (centered at X_HANDLE = 21.20 mm)
-TRACK_W = 46.60              # Width of slide guide track (0.30 mm clearance per side)
+# Track & Detent Geometry (Tuned for true tactile friction fit and positive snap retention)
+KEEPER_W = 46.50             # Width of slide keeper (widened for 0.05 mm precision sliding friction fit)
+TRACK_W = 46.60              # Width of slide guide track
 KEEPER_D = 8.20              # Thickness of solid PCTG gate body
+TRACK_D = 8.45               # Fore-aft depth of guide track (0.125 mm clearance per side, zero tilt wobble)
 Y_TRACK_CENTER = Y_SHOULDER - KEEPER_D / 2.0 # -99.61 mm (Keeper front face at Y_SHOULDER = -95.51 mm)
 Z_DETENT = 56.00             # Detent vertical elevation
 
@@ -165,58 +166,59 @@ def build_base_bracket():
     foot_poly = np.array([
         [X_OVAL - 11.5, v_front_toe],
         [X_CENT + 11.5, v_front_toe],
-        [X_CENT + 11.5, v_cent + 13.0],
-        [X_OVAL - 11.5, v_oval + 13.0]
+        [X_CENT + 11.5, v_cent + 14.5],
+        [X_OVAL - 11.5, v_oval + 14.5]
     ])
     foot_2d = (boss1_2d + boss2_2d + m3d.CrossSection([foot_poly])).offset(3.0, m3d.JoinType.Round).offset(-3.0, m3d.JoinType.Round)
     m_foot_local = foot_2d.extrude(FOOT_THICK)
 
     # -------------------------------------------------------------------------
-    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (SET BACK BEHIND BOLT DEPRESSIONS)
+    # B. RESMOOTHED ORGANIC MONOCOQUE RISER SPINE (REINFORCED BASE GUSSET TRANSITION)
     # -------------------------------------------------------------------------
     def sphere_loc(x, v, z, r, segs=24):
         return m3d.Manifold.sphere(radius=r, circular_segments=segs).translate([x, v, z])
 
     # 1. Bolt Foundation Nodes: Positioned strictly at v >= 47.0 mm (behind bolt depressions & aluminum plate)
-    s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 10.5, 6.0, 6.0) # v = 47.69 mm (behind washer footprint)
-    s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 10.5, 6.0, 6.0) # v = 47.38 mm (behind washer footprint)
+    s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 11.0, 4.5, 4.5)
+    s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 11.0, 4.5, 4.5)
 
-    # 2. Continuous Triangular Web bridging the span behind the bolt holes
-    s_web_1 = sphere_loc(-27.0, 48.0, 6.5, 6.5)
-    s_web_2 = sphere_loc(-17.0, 49.0, 7.0, 7.0)
-    s_web_3 = sphere_loc(-7.0, 48.0, 6.5, 6.5)
+    # 2. Base Transition Gusset: Adds solid reinforcement material right before the arm slopes up (v = 49 - 52 mm, z up to 5.5 mm)
+    s_base_gusset_1 = sphere_loc(-28.0, 50.0, 5.0, 5.0)
+    s_base_gusset_2 = sphere_loc(-18.0, 51.0, 5.5, 5.5)
+    s_base_gusset_3 = sphere_loc(-8.0, 50.0, 5.0, 5.0)
+    s_base_gusset_4 = sphere_loc(-1.0, 51.0, 5.0, 5.0)
 
-    # 3. Mid-Span Convergence Nodes
-    s_mid_l1 = sphere_loc(-21.0, 56.0, 11.0, 7.5)
-    s_mid_m1 = sphere_loc(-12.0, 57.0, 11.0, 7.5)
-    s_mid_r1 = sphere_loc(-3.0, 56.0, 11.0, 7.5)
+    # 3. Resmoothed, Sleeker Riser Arm: Slimmer, continuous structural rib (r = 5.5 - 6.5 mm instead of bulky 8.5 mm)
+    s_mid_l1 = sphere_loc(-19.0, 58.0, 8.5, 5.5)
+    s_mid_m1 = sphere_loc(-11.0, 59.0, 9.0, 6.0)
+    s_mid_r1 = sphere_loc(-3.0, 58.0, 8.5, 5.5)
 
-    s_mid_l2 = sphere_loc(-16.0, 67.0, 15.0, 8.0)
-    s_mid_r2 = sphere_loc(-3.0, 67.0, 15.0, 8.0)
+    s_mid_l2 = sphere_loc(-14.0, 69.0, 13.5, 6.0)
+    s_mid_r2 = sphere_loc(-3.0, 69.0, 13.5, 6.0)
 
-    # 4. Upper Spine Nodes (Broad beam along left flank of connector)
-    s_spine_1l = sphere_loc(-13.0, 79.0, 19.5, 8.5)
-    s_spine_1r = sphere_loc(-1.0, 79.0, 19.5, 8.5)
+    # 4. Upper Spine Nodes (Continuous organic rib along left flank)
+    s_spine_1l = sphere_loc(-11.0, 80.0, 18.0, 6.5)
+    s_spine_1r = sphere_loc(-1.0, 80.0, 18.0, 6.5)
 
-    s_spine_2l = sphere_loc(-9.0, 89.0, 23.5, 8.5)
-    s_spine_2r = sphere_loc(+1.0, 89.0, 23.5, 8.5)
+    s_spine_2l = sphere_loc(-8.0, 89.0, 22.5, 6.5)
+    s_spine_2r = sphere_loc(+1.0, 89.0, 22.5, 6.5)
 
     # 5. Cradle Interface Transition Nodes (Flows into cradle centered at X = 21.20 mm)
-    s_cradle_root = sphere_loc(-4.5, 93.0, 26.5, 8.5)
-    s_cradle_l = sphere_loc(+1.5, 93.0, 26.5, 9.5)
+    s_cradle_root = sphere_loc(-4.0, 93.0, 26.5, 7.5)
+    s_cradle_l = sphere_loc(+1.0, 93.0, 26.5, 8.5)
 
     # Continuous Chained Hulls forming a monocoque truss:
-    h_bolt_deck = (s_oval_root + s_web_1 + s_web_2 + s_web_3 + s_cent_root).hull()
-    h_arm_oval = (s_oval_root + s_web_1 + s_mid_l1).hull()
-    h_arm_cent = (s_cent_root + s_web_3 + s_mid_r1).hull()
-    h_web_mid1 = (s_web_1 + s_web_2 + s_web_3 + s_mid_l1 + s_mid_m1 + s_mid_r1).hull()
+    h_base_shelf = (s_oval_root + s_base_gusset_1 + s_base_gusset_2 + s_base_gusset_3 + s_base_gusset_4 + s_cent_root).hull()
+    h_gusset_trans = (s_base_gusset_1 + s_base_gusset_2 + s_base_gusset_3 + s_base_gusset_4 + s_mid_l1 + s_mid_m1 + s_mid_r1).hull()
+    h_arm_oval = (s_oval_root + s_base_gusset_1 + s_mid_l1).hull()
+    h_arm_cent = (s_cent_root + s_base_gusset_4 + s_mid_r1).hull()
 
     h_mid_span = (s_mid_l1 + s_mid_m1 + s_mid_r1 + s_mid_l2 + s_mid_r2).hull()
     h_upper1 = (s_mid_l2 + s_mid_r2 + s_spine_1l + s_spine_1r).hull()
     h_upper2 = (s_spine_1l + s_spine_1r + s_spine_2l + s_spine_2r).hull()
     h_cradle = (s_spine_2l + s_spine_2r + s_cradle_root + s_cradle_l).hull()
 
-    spine_local = h_bolt_deck + h_arm_oval + h_arm_cent + h_web_mid1 + h_mid_span + h_upper1 + h_upper2 + h_cradle
+    spine_local = h_base_shelf + h_gusset_trans + h_arm_oval + h_arm_cent + h_mid_span + h_upper1 + h_upper2 + h_cradle
 
     # Subtractions:
     # A. Guarantee 100% planar bed bottom at z_local = 0:
@@ -248,19 +250,19 @@ def build_base_bracket():
     # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive rear guide towers
     boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 51.50 + 40.0])
 
-    # 3. Slide Guide Track for Keeper (OPEN THROUGH THE TOP!):
-    track_slot = m3d.Manifold.cube([TRACK_W, 9.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 40.0])
+    # 3. Slide Guide Track for Keeper (Extends all the way down through the cradle bottom to Z = 40.0 mm):
+    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 40.0 + 45.0])
 
     # 4. Precision Female Snap Detent Pockets in Track Walls (SUBTRACTED):
     track_wall_l = X_HANDLE - TRACK_W / 2.0
     track_wall_r = X_HANDLE + TRACK_W / 2.0
 
-    detent_pocket_l = m3d.Manifold.sphere(radius=2.2, circular_segments=24).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT])
-    detent_pocket_r = m3d.Manifold.sphere(radius=2.2, circular_segments=24).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT])
+    detent_pocket_l = m3d.Manifold.sphere(radius=2.3, circular_segments=24).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT])
+    detent_pocket_r = m3d.Manifold.sphere(radius=2.3, circular_segments=24).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT])
 
-    # Vertical lead-in guide grooves running down from track top:
-    lead_in_l = m3d.Manifold.cylinder(radius_low=1.2, radius_high=1.2, height=30.0, circular_segments=16).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT])
-    lead_in_r = m3d.Manifold.cylinder(radius_low=1.2, radius_high=1.2, height=30.0, circular_segments=16).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT])
+    # Lead-in groove only at upper track (Z >= 60 mm) leaving a 1.5 mm solid retention shelf above the pocket:
+    lead_in_l = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT + 4.0])
+    lead_in_r = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT + 4.0])
 
     bracket = bracket - conn_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
 
@@ -325,12 +327,12 @@ def build_keeper():
     y_front = Y_SHOULDER
     m_keeper = fork_2d.extrude(KEEPER_D).rotate([90, 0, 0]).translate([0, y_front, 0])
 
-    # Symmetrical Male Snap Detent Bumps on lateral side edges (ADDED):
+    # Symmetrical Male Snap Detent Bumps on lateral side edges (2.0 mm radius for firm snap lock):
     keeper_edge_l = X_HANDLE - KEEPER_W / 2.0
     keeper_edge_r = X_HANDLE + KEEPER_W / 2.0
 
-    bump_l = m3d.Manifold.sphere(radius=1.8, circular_segments=24).translate([keeper_edge_l + 0.1, Y_TRACK_CENTER, Z_DETENT])
-    bump_r = m3d.Manifold.sphere(radius=1.8, circular_segments=24).translate([keeper_edge_r - 0.1, Y_TRACK_CENTER, Z_DETENT])
+    bump_l = m3d.Manifold.sphere(radius=2.0, circular_segments=24).translate([keeper_edge_l + 0.1, Y_TRACK_CENTER, Z_DETENT])
+    bump_r = m3d.Manifold.sphere(radius=2.0, circular_segments=24).translate([keeper_edge_r - 0.1, Y_TRACK_CENTER, Z_DETENT])
 
     keeper = m_keeper + bump_l + bump_r
 
