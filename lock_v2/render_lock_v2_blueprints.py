@@ -20,7 +20,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
 accurate_models_dir = os.path.join(os.path.dirname(target_dir), "accurate_models")
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\92936917-2f7b-4fba-844f-e541378233d0"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
 
 print("Loading CAD meshes for technical blueprint generation...")
 h_mesh = trimesh.load(os.path.join(accurate_models_dir, "mated_outer_housing.stl"))
@@ -107,8 +107,8 @@ ax1.set_xlabel("Screen Width (mm: Left = Driver/Connector, Right = Passenger/Out
 ax1.set_ylabel("Height Z (mm: Chin Tip = 0.0, Roof Rim = 95.40)", color='#94a3b8', fontsize=8.5)
 
 draw_dim(ax1, (-71.15, 95.40), (71.15, 95.40), "[H1] Total Width: 142.30 mm", offset=(0, 10), color='#facc15', fontsize=8.0)
-draw_dim(ax1, (-24.60 - 14.5, 50.0), (-24.60 + 14.5, 50.0), "Handle Width: 29.0 mm (Snug 30.0mm Pocket)", offset=(0, -14), color='#f97316', fontsize=7.2)
-draw_dim(ax1, (-24.60 - 9.5, 73.0), (-24.60 + 9.5, 73.0), "Keeper Throat: 19.0 mm (2x 5.0mm Shoulders)", offset=(0, 14), color='#4ade80', fontsize=7.2)
+draw_dim(ax1, (-21.20 - 15.0, 50.0), (-21.20 + 15.0, 50.0), "Cradle Pocket: 30.0 mm (Centered X = 21.20 mm)", offset=(0, -14), color='#f97316', fontsize=7.2)
+draw_dim(ax1, (-21.20 - 9.5, 73.0), (-21.20 + 9.5, 73.0), "Keeper Throat: 19.0 mm (2x 8.55mm Shoulders)", offset=(0, 14), color='#4ade80', fontsize=7.2)
 
 ax1.text(-50, 110, "SCREEN LEFT: CONNECTOR & LOCK V2", color='#38bdf8', fontsize=8.5, weight='bold', ha='center')
 ax1.text(50, 110, "SCREEN RIGHT: AC 120V OUTLET", color='#94a3b8', fontsize=8.5, weight='bold', ha='center')
@@ -117,8 +117,8 @@ ax1.text(50, 110, "SCREEN RIGHT: AC 120V OUTLET", color='#94a3b8', fontsize=8.5,
 # PANEL 2: SIDE PROFILE & AXIAL RETENTION SECTION (DEPTH PROFILE)
 # ==============================================================================
 ax2 = fig.add_subplot(2, 2, 2)
-create_card(ax2, "PANEL 2: SIDE PROFILE & UNDER-BOX EXTENDED CLAMPING TOE (Y-Z)",
-            "Depth Profile • Toe Extends 8.21 mm Under Box (2.04 mm Air Gap) • Locked at Y = -95.51 mm")
+create_card(ax2, "PANEL 2: SIDE PROFILE & 100% FLAT BOLT FLANGE (Y-Z)",
+            "Depth Profile • Flat Flange (2.80 mm) Across Bolts • Locked at Y = -95.51 mm")
 
 ax2.tripcolor(h_mesh.vertices[:, 1], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.25, edgecolors='#1e293b', lw=0.15)
 ax2.tripcolor(b_mesh.vertices[:, 1], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.50, edgecolors='#0f172a', lw=0.2)
@@ -141,11 +141,11 @@ draw_dim(ax2, (-95.51, 88.0), (-103.71, 88.0), "Keeper: 8.2 mm (Open U-Fork)", o
 # Callout for extended toe under box
 draw_dim(ax2, (-36.21, 30.0), (-28.00, 30.0), "Toe Under Box: 8.21 mm", offset=(0, -10), color='#4ade80', fontsize=7.5)
 
-ax2.annotate("UNDER-BOX TOE EXTENSION (Y = -28.0 mm)\n2.04 mm Vertical Gap Below Box!\n5.66 mm PCTG Ahead of Washer Face",
-             xy=(-28.0, 34.16), xytext=(-65.0, 15.0),
-             arrowprops=dict(arrowstyle="->", color='#4ade80', lw=1.8),
-             color='#4ade80', fontsize=8.0, weight='bold',
-             bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#4ade80', lw=1.2))
+ax2.annotate("FLAT BOLT FLANGE (Z = 2.80 mm)\n100% Flat Starting at Bolt Depressions!\nZero Plate Interference • Riser Set Back",
+             xy=(-42.4, 30.9), xytext=(-85.0, 12.0),
+             arrowprops=dict(arrowstyle="->", color='#facc15', lw=1.8),
+             color='#facc15', fontsize=8.0, weight='bold',
+             bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#facc15', lw=1.2))
 
 ax2.annotate("LOCKED SHOULDER PLANE (Y = -95.51 mm)\nZero Axial Pullout Possible!\nKeeper Inverted U-Fork Drops from Above",
              xy=(-95.51, 59.2), xytext=(-155.0, 42.0),
@@ -157,8 +157,8 @@ ax2.annotate("LOCKED SHOULDER PLANE (Y = -95.51 mm)\nZero Axial Pullout Possible
 # PANEL 3: TOP PLAN VIEW (FLANGED NUT WASHER SEAT & EXTENDED TOE)
 # ==============================================================================
 ax3 = fig.add_subplot(2, 2, 3)
-create_card(ax3, "PANEL 3: TOP PLAN VIEW (FLANGED NUT WASHER SEATS & ALIGNED SNAP DETENTS)",
-            "X-Y Projection • Ø 18.50 mm Washer Seats • Detents Aligned with 0.000 mm Deviation")
+create_card(ax3, "PANEL 3: TOP PLAN VIEW (FLAT BOLT INTERFACE & ALIGNED SNAP DETENTS)",
+            "X-Y Projection • Flat Flange across Bolts • Detents Aligned with 0.000 mm Deviation")
 
 ax3.tripcolor(h_mesh.vertices[:, 0], h_mesh.vertices[:, 1], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.25, edgecolors='#1e293b', lw=0.15)
 ax3.tripcolor(b_mesh.vertices[:, 0], b_mesh.vertices[:, 1], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.50, edgecolors='#0f172a', lw=0.2)
@@ -172,10 +172,10 @@ c2 = plt.Circle((-39.625, -42.59), 18.50/2.0, color='#facc15', fill=False, lw=1.
 ax3.add_patch(c1)
 ax3.add_patch(c2)
 
-# Mark snap detent coordinates
-ax3.plot([3.70], [-99.61], 'o', color='#4ade80', markersize=6)
-ax3.plot([50.30], [-99.61], 'o', color='#4ade80', markersize=6)
-ax3.text(27.0, -114.0, "Precision Snap Detents (X = 3.70 & 50.30 mm, Y = -99.61 mm)\nTrack Female Pocket (R = 2.2 mm) + Keeper Male Bump (R = 1.8 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
+# Mark snap detent coordinates (centered at X = 21.20 mm)
+ax3.plot([-2.10], [-99.61], 'o', color='#4ade80', markersize=6)
+ax3.plot([44.50], [-99.61], 'o', color='#4ade80', markersize=6)
+ax3.text(21.20, -114.0, "Precision Snap Detents (X = -2.10 & 44.50 mm, Y = -99.61 mm)\nTrack Female Pocket (R = 2.2 mm) + Keeper Male Bump (R = 1.8 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
 
 ax3.set_xlim(-95, 95)
 ax3.set_ylim(-190, 25)
@@ -186,7 +186,7 @@ ax3.set_ylabel("Depth Y (mm: -Y = Rearward, +Y = Forward)", color='#94a3b8', fon
 draw_dim(ax3, (-70.25, -45.0), (70.25, -45.0), "[H11] Inner Wing Span: 140.50 mm", offset=(0, 28), color='#facc15', fontsize=8.0)
 draw_dim(ax3, (-60.10, -50.0), (60.10, -50.0), "[H12] Plate Width: 120.20 mm", offset=(0, -10), color='#38bdf8', fontsize=8.0)
 draw_dim(ax3, (-5.275, -42.29), (39.625, -42.59), "Dual M6 Spacing: 44.90 mm", offset=(0, 8), color='#4ade80', fontsize=8.0)
-draw_dim(ax3, (-50.0, -95.51), (-4.0, -95.51), "Rear Cradle: 46.0 mm", offset=(0, -12), color='#38bdf8', fontsize=7.5)
+draw_dim(ax3, (-4.80, -95.51), (47.20, -95.51), "Rear Cradle: 52.0 mm", offset=(0, -12), color='#38bdf8', fontsize=7.5)
 
 ax3.annotate("Extended Clamping Toe\n(Under Box to Y = -28 mm)", xy=(-15.0, -28.0), xytext=(-55.0, -15.0),
              arrowprops=dict(arrowstyle="->", color='#4ade80', lw=1.2),

@@ -43,7 +43,7 @@ import trimesh
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
 accurate_models_dir = os.path.join(os.path.dirname(target_dir), "accurate_models")
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\92936917-2f7b-4fba-844f-e541378233d0"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
 
 # ==============================================================================
 # 1. GROUND TRUTH CALIPER & ASSEMBLY CONSTANTS
@@ -74,11 +74,11 @@ H_HOLE_OVAL_Y = 6.45
 X_CENT = X_HOLE_CENT
 X_OVAL = X_HOLE_OVAL
 
-# Connector & Receptacle Alignment
-X_CONN = 27.00               # Collar center X
+# Connector & Receptacle Alignment (Calibrated from physical vehicle test-fit: 5.8mm left of 27.00mm = 21.20mm)
+X_CONN = 21.20               # Collar center X
 Z_CONN = 59.20               # Collar center Z
-X_HANDLE = 24.60             # True connector handle body & cable center X
-Z_HANDLE = 62.10             # True connector handle body & cable center Z
+X_HANDLE = 21.20             # Connector handle body & cable center X
+Z_HANDLE = 62.10             # Connector handle body & cable center Z
 Y_BOX_BACK = -36.21          # Outlet box rear wall
 Y_CONN_RIM = -40.91          # Seated connector front rim ([GAP] = 4.70 mm)
 Y_SHOULDER = -95.51          # Rigid orange shoulder plane ([B7] = 54.60 mm)
@@ -92,13 +92,13 @@ TOWER_H = 37.11              # [A4] Total height to top of tower
 BOLT_DIA = 6.00              # M6 bolt shank
 SLOT_W = 7.20                # Bolt clearance through-hole
 NUT_WASHER_DIA = 17.25       # Actual hardware built-in washer diameter
-WASHER_D = 18.50             # Counterbore diameter providing 0.625 mm radial clearance
-FOOT_THICK = 2.80            # Flange thickness under nut & under box (leaves >= 2.0 mm vertical gap)
-BOSS_HEIGHT = 8.50           # Raised heavy-duty bolt boss height (was 2.80 mm thin wafer)
+WASHER_D = 18.50             # Tool clearance cylinder diameter providing 0.625 mm radial clearance
+FOOT_THICK = 2.80            # 100% Flat flange thickness starting at bolt depressions (leaves >= 2.0 mm vertical gap under box)
+BOSS_HEIGHT = FOOT_THICK     # Uniform flat planar thickness (eliminates raised bosses / turrets)
 Y_FRONT_TOE = -28.00         # Extended forward toe under box (8.21 mm extension under box)
 
 # Track & Detent Geometry
-KEEPER_W = 46.00             # Width of slide keeper (centered at X_HANDLE = 24.60 mm)
+KEEPER_W = 46.00             # Width of slide keeper (centered at X_HANDLE = 21.20 mm)
 TRACK_W = 46.60              # Width of slide guide track (0.30 mm clearance per side)
 KEEPER_D = 8.20              # Thickness of solid PCTG gate body
 Y_TRACK_CENTER = Y_SHOULDER - KEEPER_D / 2.0 # -99.61 mm (Keeper front face at Y_SHOULDER = -95.51 mm)
@@ -152,84 +152,61 @@ def build_base_bracket():
     print("Designing continuous organic lock_v2_base_bracket (Open-Top U-Saddle)...")
 
     # -------------------------------------------------------------------------
-    # A. CONTINUOUS BASE FLANGE WITH RAISED BOLT BOSSES (8.50 mm HEAVY-DUTY TURRETS)
+    # A. 100% FLAT CONTINUOUS BASE FLANGE (UNIFORM 2.80 mm PLANAR WAFER)
     # -------------------------------------------------------------------------
     v_cent = abs(Y_HOLE_CENT - Y_FRONT_ROOT) / COS_T # 36.883 mm
     v_oval = abs(Y_HOLE_OVAL - Y_FRONT_ROOT) / COS_T # 37.185 mm
     v_front_toe = (Y_FRONT_ROOT - Y_FRONT_TOE) / COS_T # 22.52 mm
 
-    # 1. Base Footprint extruded to full BOSS_HEIGHT = 8.50 mm in local plate frame:
+    # 1. Base Footprint extruded strictly to FOOT_THICK = 2.80 mm in local plate frame:
     boss1_2d = m3d.CrossSection.circle(15.0, circular_segments=36).translate([X_CENT, v_cent])
     boss2_2d = m3d.CrossSection.circle(15.5, circular_segments=36).translate([X_OVAL, v_oval])
 
     foot_poly = np.array([
         [X_OVAL - 11.5, v_front_toe],
         [X_CENT + 11.5, v_front_toe],
-        [X_CENT + 11.5, v_cent + 12.0],
-        [X_OVAL - 11.5, v_oval + 12.0]
+        [X_CENT + 11.5, v_cent + 13.0],
+        [X_OVAL - 11.5, v_oval + 13.0]
     ])
     foot_2d = (boss1_2d + boss2_2d + m3d.CrossSection([foot_poly])).offset(3.0, m3d.JoinType.Round).offset(-3.0, m3d.JoinType.Round)
-    m_foot_full = foot_2d.extrude(BOSS_HEIGHT)
-
-    # 2. Smooth 45-degree ramp tool in v-z plane:
-    # Cuts from z = 2.80 mm under box (v <= 30.5 mm) to full boss height (z = 8.50 mm at v = 35.5 mm)
-    cut_poly = np.array([
-        [0.0, FOOT_THICK],
-        [30.50, FOOT_THICK],
-        [35.50, BOSS_HEIGHT],
-        [35.50, 25.00],
-        [0.0, 25.00]
-    ])
-    cut_cs = m3d.CrossSection([cut_poly]).offset(1.2, m3d.JoinType.Round).offset(-1.2, m3d.JoinType.Round)
-    cut_tool = cut_cs.extrude(160.0).translate([0, 0, -80.0])
-    R_cut = np.array([
-        [0, 0, 1, 0],
-        [1, 0, 0, 0],
-        [0, 1, 0, 0],
-        [0, 0, 0, 1]
-    ])
-    cut_tool = cut_tool.transform(R_cut[:3, :])
-    m_foot_local = m_foot_full - cut_tool
+    m_foot_local = foot_2d.extrude(FOOT_THICK)
 
     # -------------------------------------------------------------------------
-    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (UNIFIED BOLT INTERFACE & CONTINUOUS DECK)
+    # B. HEAVY-DUTY ORGANIC MONOCOQUE RISER SPINE (SET BACK BEHIND BOLT DEPRESSIONS)
     # -------------------------------------------------------------------------
     def sphere_loc(x, v, z, r, segs=24):
         return m3d.Manifold.sphere(radius=r, circular_segments=segs).translate([x, v, z])
 
-    # 1. Bolt Foundation Nodes: Envelop the 8.50 mm bolt bosses directly into the spine
-    s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 5.0, 8.5, 8.5)
-    s_oval_flank = sphere_loc(X_OVAL - 2.0, v_oval + 4.0, 7.5, 7.5)
+    # 1. Bolt Foundation Nodes: Positioned strictly at v >= 47.0 mm (behind bolt depressions & aluminum plate)
+    s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 10.5, 6.0, 6.0) # v = 47.69 mm (behind washer footprint)
+    s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 10.5, 6.0, 6.0) # v = 47.38 mm (behind washer footprint)
 
-    s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 6.0, 8.5, 8.5)
-    s_cent_flank = sphere_loc(X_CENT + 1.0, v_cent + 7.0, 7.5, 7.5)
-
-    # 2. Continuous Triangular Web bridging the entire 45 mm span between bolt bosses
-    s_web_1 = sphere_loc(-28.0, 44.0, 8.0, 8.0)
-    s_web_2 = sphere_loc(-18.0, 45.0, 8.5, 8.5)
-    s_web_3 = sphere_loc(-9.0, 44.0, 8.0, 8.0)
+    # 2. Continuous Triangular Web bridging the span behind the bolt holes
+    s_web_1 = sphere_loc(-27.0, 48.0, 6.5, 6.5)
+    s_web_2 = sphere_loc(-17.0, 49.0, 7.0, 7.0)
+    s_web_3 = sphere_loc(-7.0, 48.0, 6.5, 6.5)
 
     # 3. Mid-Span Convergence Nodes
-    s_mid_l1 = sphere_loc(-22.0, 54.0, 11.5, 8.5)
-    s_mid_m1 = sphere_loc(-12.0, 55.0, 11.5, 8.5)
-    s_mid_r1 = sphere_loc(-3.0, 54.0, 11.5, 8.5)
+    s_mid_l1 = sphere_loc(-21.0, 56.0, 11.0, 7.5)
+    s_mid_m1 = sphere_loc(-12.0, 57.0, 11.0, 7.5)
+    s_mid_r1 = sphere_loc(-3.0, 56.0, 11.0, 7.5)
 
-    s_mid_l2 = sphere_loc(-16.0, 66.0, 15.5, 8.5)
-    s_mid_r2 = sphere_loc(-3.0, 66.0, 15.5, 8.5)
+    s_mid_l2 = sphere_loc(-16.0, 67.0, 15.0, 8.0)
+    s_mid_r2 = sphere_loc(-3.0, 67.0, 15.0, 8.0)
 
     # 4. Upper Spine Nodes (Broad beam along left flank of connector)
-    s_spine_1l = sphere_loc(-12.0, 78.0, 19.5, 8.5)
-    s_spine_1r = sphere_loc(-1.0, 78.0, 19.5, 8.5)
+    s_spine_1l = sphere_loc(-13.0, 79.0, 19.5, 8.5)
+    s_spine_1r = sphere_loc(-1.0, 79.0, 19.5, 8.5)
 
-    s_spine_2l = sphere_loc(-8.0, 88.0, 23.5, 8.5)
-    s_spine_2r = sphere_loc(+1.0, 88.0, 23.5, 8.5)
+    s_spine_2l = sphere_loc(-9.0, 89.0, 23.5, 8.5)
+    s_spine_2r = sphere_loc(+1.0, 89.0, 23.5, 8.5)
 
-    # 5. Cradle Interface Transition Nodes
-    s_cradle_root = sphere_loc(-2.0, 93.0, 26.5, 8.5)
-    s_cradle_l = sphere_loc(+4.0, 93.0, 26.5, 9.5)
+    # 5. Cradle Interface Transition Nodes (Flows into cradle centered at X = 21.20 mm)
+    s_cradle_root = sphere_loc(-4.5, 93.0, 26.5, 8.5)
+    s_cradle_l = sphere_loc(+1.5, 93.0, 26.5, 9.5)
 
     # Continuous Chained Hulls forming a monocoque truss:
-    h_bolt_deck = (s_oval_flank + s_oval_root + s_web_1 + s_web_2 + s_web_3 + s_cent_root + s_cent_flank).hull()
+    h_bolt_deck = (s_oval_root + s_web_1 + s_web_2 + s_web_3 + s_cent_root).hull()
     h_arm_oval = (s_oval_root + s_web_1 + s_mid_l1).hull()
     h_arm_cent = (s_cent_root + s_web_3 + s_mid_r1).hull()
     h_web_mid1 = (s_web_1 + s_web_2 + s_web_3 + s_mid_l1 + s_mid_m1 + s_mid_r1).hull()
@@ -241,9 +218,12 @@ def build_base_bracket():
 
     spine_local = h_bolt_deck + h_arm_oval + h_arm_cent + h_web_mid1 + h_mid_span + h_upper1 + h_upper2 + h_cradle
 
-    # Clip anything below z_local = 0 to guarantee 100% planar bottom:
+    # Subtractions:
+    # A. Guarantee 100% planar bed bottom at z_local = 0:
     sub_bottom = m3d.Manifold.cube([200.0, 200.0, 50.0], center=True).translate([-15.0, 50.0, -25.0])
-    spine_local = spine_local - sub_bottom
+    # B. Guarantee 100% flat flange at z_local = 2.80 mm for all v <= 46.8 mm (bolt depression & aluminum plate zone):
+    sub_bolt_zone = m3d.Manifold.cube([200.0, 100.0, 50.0], center=True).translate([-15.0, -3.2, 27.80])
+    spine_local = spine_local - sub_bottom - sub_bolt_zone
 
     bracket_local = m_foot_local + spine_local
     bracket_world = bracket_local.transform(M_plate)
@@ -261,11 +241,11 @@ def build_base_bracket():
     bracket = bracket_world + cradle_outer
 
     # 1. Main connector body pocket (OPEN ALL THE WAY UP THROUGH THE TOP!):
-    # Calibrated to 30.0 mm width for snug 0.50 mm lateral slip-fit around 29.0 mm connector handle (X in [9.60, 39.60])
+    # Calibrated to 30.0 mm width for snug 0.50 mm lateral slip-fit around 29.0 mm connector handle (centered at X = 21.20 mm)
     conn_pocket = m3d.Manifold.cube([30.0, 60.0, 80.0], center=True).translate([X_HANDLE, Y_SHOULDER + 30.0, 52.10 + 40.0])
 
     # 2. Rear cable U-slot (OPEN ALL THE WAY UP THROUGH THE TOP! NO CLOSED CIRCLE!):
-    # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive 16.0 mm rear guide towers
+    # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive rear guide towers
     boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 51.50 + 40.0])
 
     # 3. Slide Guide Track for Keeper (OPEN THROUGH THE TOP!):
@@ -296,11 +276,12 @@ def build_base_bracket():
     bore_oval_local = slot_outer_cs.extrude(tool_len).translate([X_OVAL, v_oval, -5.0])
     bore_oval = bore_oval_local.transform(M_plate)
 
-    socket_cent_local = m3d.Manifold.cylinder(radius_low=WASHER_D / 2.0, radius_high=WASHER_D / 2.0, height=tool_len, circular_segments=36).translate([X_CENT, v_cent, 2.5])
+    # Tool clearance cylinders extending upward from flat flange at z = 2.80 mm
+    socket_cent_local = m3d.Manifold.cylinder(radius_low=WASHER_D / 2.0, radius_high=WASHER_D / 2.0, height=tool_len, circular_segments=36).translate([X_CENT, v_cent, FOOT_THICK])
     socket_cent = socket_cent_local.transform(M_plate)
 
     socket_oval_cs = m3d.CrossSection.square([W_HOLE_OVAL_X - SLOT_W, 0.1], center=True).offset(WASHER_D / 2.0, m3d.JoinType.Round)
-    socket_oval_local = socket_oval_cs.extrude(tool_len).translate([X_OVAL, v_oval, 2.5])
+    socket_oval_local = socket_oval_cs.extrude(tool_len).translate([X_OVAL, v_oval, FOOT_THICK])
     socket_oval = socket_oval_local.transform(M_plate)
 
     bracket = bracket - bore_cent - bore_oval - socket_cent - socket_oval
@@ -511,7 +492,8 @@ if __name__ == '__main__':
     vol_inter_kc = (keeper_shift ^ m_c).volume()
 
     # Active shoulder bearing overlap metrics
-    handle_x_min, handle_x_max = 10.10, 39.10
+    handle_x_min = X_HANDLE - 36.10 / 2.0
+    handle_x_max = X_HANDLE + 36.10 / 2.0
     slot_x_min, slot_x_max = X_HANDLE - 9.5, X_HANDLE + 9.5
     left_overlap = slot_x_min - handle_x_min
     right_overlap = handle_x_max - slot_x_max

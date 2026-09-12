@@ -19,19 +19,19 @@ In direct response to mechanical fatigue, installation ergonomics, and physical 
    - **Zero Closed Holes**: The keeper is a **100% open-bottom inverted U-fork** (\(\text{Genus} = 0\)). The bottom of the keeper is completely wide open with zero bottom bridge or floor.
    - **Drop-In Assembly**: Neither the connector head nor the cable needs to be threaded through any closed hole. Once the orange connector and cable drop into the open-top base bracket saddle, the keeper drops straight down over the cable boot from above.
    - **Robust Thickness**: **\(8.2\text{ mm}\) solid PCTG thickness** with an integrated **\(36.0\text{ mm}\) wide** ergonomic thumb grip tab.
-   - **Calibrated Cable Throat**: Features a **\(19.0\text{ mm}\) wide inverted U-slot** centered at \(X = 24.60\text{ mm}\) that clears the \(\varnothing 17.0\text{ mm}\) corrugated conduit with \(+1.0\text{ mm}\) radial air gap and \(0.000000\text{ mm}^3\) collision volume.
-   - **Bilateral 5.0 mm Bearing Shoulders (1.00 Symmetry Ratio)**:
-     * Left Shoulder: Bears against connector shoulder from \(X = 10.10\text{ mm}\) to \(15.10\text{ mm}\) (\(5.00\text{ mm}\) solid contact).
-     * Right Shoulder: Bears against connector shoulder from \(X = 34.10\text{ mm}\) to \(39.10\text{ mm}\) (\(5.00\text{ mm}\) solid contact).
-     * Symmetrical Bearing Area: **\(> 160\text{ mm}^2\)** of solid PCTG bearing squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout or cocking.
+   - **Calibrated Cable Throat**: Features a **\(19.0\text{ mm}\) wide inverted U-slot** centered at \(X = 21.20\text{ mm}\) that clears the \(\varnothing 17.0\text{ mm}\) corrugated conduit with \(+1.0\text{ mm}\) radial air gap and \(0.000000\text{ mm}^3\) collision volume.
+   - **Bilateral 8.55 mm Bearing Shoulders (1.000 Symmetry Ratio)**:
+     * Left Shoulder: Bears against connector shoulder from \(X = 3.15\text{ mm}\) to \(11.70\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
+     * Right Shoulder: Bears against connector shoulder from \(X = 30.70\text{ mm}\) to \(39.25\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
+     * Symmetrical Bearing Area: **\(\sim 325\text{ mm}^2\)** of solid PCTG bearing squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout or cocking.
    - **Precision Aligned Snap Detents**:
-     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = 1.30\text{ mm}\) and \(X = 47.90\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
-     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = 1.70\text{ mm}\) and \(X = 47.50\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
+     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = -2.10\text{ mm}\) and \(X = 44.50\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
+     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = -1.70\text{ mm}\) and \(X = 44.10\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
      * **0.000 mm Alignment Error**: The detents line up identically in \(Y\) and \(Z\), sliding down smoothly and snapping together with a tactile "CLICK" that prevents vibration walkout.
    - **Toolless Release**: Simply pull straight up on the thumb tab to release the keeper for vehicle servicing.
 
 3. **Accommodates OEM M6 Flanged Nuts with Built-In \(\varnothing 17.25\text{ mm}\) Washers**:
-   - Precision counterbore seats of **\(\varnothing 18.50\text{ mm}\)** (\(0.625\text{ mm}\) radial clearance) allow OEM flanged nuts with their integrated \(\varnothing 17.25\text{ mm}\) washer to seat completely flush without edge binding.
+   - Flat flange seats allow OEM flanged nuts with their integrated \(\varnothing 17.25\text{ mm}\) washer to seat completely flush without edge binding.
    - Enclosed through-holes (\(\varnothing 7.20\text{ mm}\) Central / \(8.00 \times 7.20\text{ mm}\) Outer Slot) clamp the lock rigidly to the vehicle frame.
    - Unimpeded vertical socket tool clearance cylinders (\(\varnothing 18.50\text{ mm}\)) extend normal to the plate through the top of the bracket for direct access with a standard \(10\text{ mm}\) socket wrench.
 
@@ -41,12 +41,11 @@ In direct response to mechanical fatigue, installation ergonomics, and physical 
    - The foot thickness under the box is calibrated to \(2.80\text{ mm}\), leaving a verified **\(2.04\text{ mm}\) vertical air gap** below the flat underside of the outlet box (\(Z = 36.20\text{ mm}\)).
    - Acts as a continuous cantilever lever arm that prevents bracket tipping and transfers compressive clamping reaction directly into the vehicle floor plate.
 
-5. **Unified Bolt-to-Spine Monocoque Transition (8.50 mm Heavy-Duty Turrets & Continuous Deck)**:
-   - **Raised \(8.50\text{ mm}\) Bolt Turrets with \(6.0\text{ mm}\) Deep Captive Sockets**: The bolt interface is no longer a flat wafer. Both M6 bolt bosses are raised to a substantial \(8.50\text{ mm}\) turret height, fully enclosing the M6 flanged nut (\(\sim 6.3\text{ mm}\) tall) in a deep, recessed \(\varnothing 18.50\text{ mm}\) counterbore pocket.
-   - **Eliminates Abrupt Steps & Narrow Necks**: The riser spine does not start behind the bolt holes as an isolated separate structure. Instead, the spine foundation envelops the entire rear and flanks of the bolt bosses, creating a smooth, sweeping automotive-grade structural casting flow.
-   - **Continuous Solid Gusset Deck**: Completely bridges the entire \(44.90\text{ mm}\) span between the central and oval bolt bosses with a monolithic, thick triangulated web that transfers clamping preload directly into the spine.
-   - **Smooth Filleted Ramp Transition**: A continuous \(45^\circ\) tangent S-curve ramp smoothly transitions from the \(2.80\text{ mm}\) under-box compression toe to the \(8.50\text{ mm}\) bolt bosses and rising spine.
-   - **Substantial Solid Volume**: Bracket volume is now **\(43,530\text{ mm}^3\)** (a 61% increase over early prototypes), providing maximum rigidity and fatigue resistance under severe vehicle vibration while maintaining strictly **\(0.000000\text{ mm}^3\) collision**.
+5. **100% Flat Bolt Flange (Zero Plate Interference) & Vehicle Fit-Check Calibration**:
+   - **Eliminates Raised Turrets & Deep Sockets**: The bolt interface is **100% flat and planar** at \(Z_{\text{local}} = 2.80\text{ mm}\) starting at the bolt depressions. All raised 8.50 mm bosses, counterbore walls, and inter-bolt deck have been eliminated to provide zero interference with the vehicle's stamped aluminum floor plate.
+   - **Spine Foundation Setback**: The Wishbone riser backbone nodes are positioned strictly **behind the bolt depressions** (at \(v \ge 47.0\text{ mm}\), \(Y \le -52.0\text{ mm}\)), behind the rear edge of the aluminum plate (\(Y = -53.00\text{ mm}\)).
+   - **Calibrated 5.8 mm Offset Realignment**: The opening, cradle, guide tracks, and keeper are realigned from physical vehicle test-fitting: shifted **\(5.8\text{ mm}\) to the left** (facing windshield) from the previous large opening design (\(X = 27.00\text{ mm} \to \mathbf{X = 21.20\text{ mm}\)), perfectly centering the retention cradle over the vehicle's connector and conduit.
+   - **Solid PCTG Volume**: Bracket maintains full structural monocoque integrity while providing strictly **\(0.000000\text{ mm}^3\) collision volume** across Outer Housing, Outlet Box, and Connector.
 
 ```text
                VEHICLE INTERIOR (+Y)
@@ -100,8 +99,10 @@ All geometry strictly references [`accurate_models/README_AI.md`](file:///c:/Use
 | **Aluminum Plate Angle `[H16c]`** | **\(5.87^\circ\)** upward pitch | **\(5.87^\circ\)** matched base foot pitch | 100% flush bearing contact |
 | **Connector Seated Gap `[GAP]`** | \(4.70\text{ mm}\) clearance | Leaves \(4.70\text{ mm}\) undisturbed | Factory seal compression maintained |
 | **Connector Rigid Length `[B7]`**| \(54.60\text{ mm}\) | Shoulder plane locked at **\(Y = -95.51\text{ mm}\)** | Positive mechanical axial stop |
-| **Shoulder Bearing Overlap** | None (loose in prototype) | **2x \(5.00\text{ mm}\) Bilateral Shoulders** (\(>160\text{ mm}^2\)) | Symmetrical balanced axial retention |
+| **Shoulder Bearing Overlap** | None (loose in prototype) | **2x \(8.55\text{ mm}\) Bilateral Shoulders** (\(\sim 325\text{ mm}^2\)) | Symmetrical balanced axial retention |
 | **Bilateral Symmetry Ratio** | Asymmetric in early build | **1.000 (Exact 50/50 load sharing)** | Eliminates cantilever yaw / twisting |
+| **Cradle Centerline** | \(X = 27.00\text{ mm}\) (early design) | **\(X = 21.20\text{ mm}\)** (\(5.8\text{ mm}\) left calibration) | Directly concentric with vehicle connector |
+| **Bolt Mounting Interface** | Raised \(8.5\text{ mm}\) turrets | **100% Flat Flange (\(2.80\text{ mm}\))** starting at bolt depressions | Zero interference with aluminum plate |
 | **Cradle Guide Channel** | \(38.5\text{ mm}\) wide (\(9.5\text{ mm}\) slop) | **\(30.0\text{ mm}\) Snug Channel** (\(0.50\text{ mm}\) slip-fit) | Prevents side-to-side wiggle and rattle |
 | **Cable Boot Clearance** | \(\varnothing 17.00\text{ mm}\) rubber boot | \(\varnothing 19.00\text{ mm}\) U-slot (\(1.0\text{ mm}\) radial air gap) | Smooth lead-in, zero cable chafing |
 | **Outer Housing Wings** | Inner span \(140.50\text{ mm}\) \([H11]\) | Lock width \(105.71\text{ mm}\) (\(>17\text{ mm}\) air gap to wings) | Ample lateral clearance |
@@ -138,7 +139,7 @@ All geometry strictly references [`accurate_models/README_AI.md`](file:///c:/Use
   * **Slide Keeper**: Pre-oriented **100% flat on its wide \(1351\text{ mm}^2\) front bearing face** (\(Z = 0\)).
     - *Flexural Strength*: Continuous filament strands run across the cantilever snap detent tabs in the XY plane, maximizing flexural fatigue endurance.
     - *Zero Supports*: Low profile (\(12.2\text{ mm}\) total height) requires 0% supports.
-  * **Combined Bed Contact Area**: **\(1806.8\text{ mm}^2\)** of planar contact for rock-solid bed adhesion on the textured PEI plate.
+  * **Combined Bed Contact Area**: **\(3501.1\text{ mm}^2\)** of planar contact for rock-solid bed adhesion on the textured PEI plate.
 
 - **Material Selection**: **PCTG** (e.g. Fiberlogy PCTG or Bambu PCTG)
 - **Nozzle**: \(0.4\text{ mm}\) Hardened Steel

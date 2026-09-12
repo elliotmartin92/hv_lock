@@ -24,7 +24,7 @@ import shapely.geometry as sg
 from shapely.ops import unary_union
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\adc92446-2de3-4394-b3dd-ecf0f0ccb51d"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
 
 def create_box(extents, translation=[0, 0, 0]):
     m = trimesh.creation.box(extents=extents)
@@ -448,8 +448,8 @@ def build_mated_assembly():
         s.visual.vertex_colors = [2, 6, 23, 255]
 
     # 3. RECEPTACLE COLLAR AT REAR OF BOX (Extending from Y = -36.21 mm along -Y)
-    # Placed on LEFT side of box (+X) behind the flap door
-    collar_x = 27.0
+    # Placed on LEFT side of box (+X) behind the flap door (calibrated to X = 21.20 mm)
+    collar_x = 21.20
     collar_w = 22.70 # [D1]
     collar_h = 33.05 # [D2]
     collar_len = 22.37 # [C1]
@@ -471,7 +471,8 @@ def build_mated_assembly():
     c_rot.apply_transform(rot_conn)
     
     shroud_front_y = c_rot.bounds[1, 1]
-    shroud_center_x = (c_rot.bounds[0, 0] + c_rot.bounds[1, 0]) / 2.0
+    # Shroud body axis and cable center is at X = 0.0 (do not skew by 4.80 mm side rib)
+    shroud_center_x = 0.0
     shroud_center_z = (c_rot.bounds[0, 2] + c_rot.bounds[1, 2]) / 2.0
     
     dx_conn = collar_x - shroud_center_x
