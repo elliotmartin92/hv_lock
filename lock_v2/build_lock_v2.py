@@ -250,8 +250,8 @@ def build_base_bracket():
     # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive rear guide towers
     boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 51.50 + 40.0])
 
-    # 3. Slide Guide Track for Keeper (Extends all the way down through the cradle bottom to Z = 40.0 mm):
-    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 40.0 + 45.0])
+    # 3. Slide Guide Track for Keeper (OPEN THROUGH THE TOP, floor at Z = 48.0 mm):
+    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 40.0])
 
     # 4. Precision Female Snap Detent Pockets in Track Walls (SUBTRACTED):
     track_wall_l = X_HANDLE - TRACK_W / 2.0
