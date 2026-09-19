@@ -239,18 +239,16 @@ def build_base_bracket():
     bracket = bracket_world + cradle_outer
 
     # 1. Main connector body pocket (OPEN ALL THE WAY UP THROUGH THE TOP!):
-    # Calibrated to 42.0 mm width clearing connector shroud and collar at X = -6.80 mm, down to Z = 38.0 mm
-    conn_pocket = m3d.Manifold.cube([42.0, 65.0, 90.0], center=True).translate([X_HANDLE, Y_SHOULDER + 32.5, 38.0 + 45.0])
-
-    # 1b. Box Receptacle Collar Clearance (OPEN ALL THE WAY THROUGH TOP):
-    collar_pocket = m3d.Manifold.cube([26.0, 30.0, 90.0], center=True).translate([X_HANDLE, Y_BOX_BACK - 15.0, 38.0 + 45.0])
+    # Calibrated to 30.0 mm width for snug 0.50 mm lateral slip-fit around 29.0 mm connector handle (centered at X = 49.20 mm)
+    # Floor at Z = 52.10 mm provides a solid saddle bed underneath the connector
+    conn_pocket = m3d.Manifold.cube([30.0, 60.0, 80.0], center=True).translate([X_HANDLE, Y_SHOULDER + 30.0, 52.10 + 40.0])
 
     # 2. Rear cable U-slot (OPEN ALL THE WAY UP THROUGH THE TOP! NO CLOSED CIRCLE!):
-    # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive rear guide towers
-    boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 38.0 + 45.0])
+    # Calibrated to 20.0 mm width clearing 17.0 mm conduit; floor at Z = 51.50 mm retains solid 6.5 mm floor under cable
+    boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 51.50 + 40.0])
 
     # 3. Slide Guide Track for Keeper (OPEN THROUGH THE TOP, floor at Z = 48.0 mm):
-    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 45.0])
+    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 40.0])
 
     # 4. Precision Female Snap Detent Pockets in Track Walls (SUBTRACTED):
     track_wall_l = X_HANDLE - TRACK_W / 2.0
@@ -263,7 +261,7 @@ def build_base_bracket():
     lead_in_l = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT + 4.0])
     lead_in_r = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT + 4.0])
 
-    bracket = bracket - conn_pocket - collar_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
+    bracket = bracket - conn_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
 
     # -------------------------------------------------------------------------
     # D. SUBTRACT ENCLOSED M6 THROUGH-HOLES & VERTICAL TOOL ACCESS
