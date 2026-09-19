@@ -43,7 +43,7 @@ import trimesh
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
 accurate_models_dir = os.path.join(os.path.dirname(target_dir), "accurate_models")
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\9d06c7e1-2a89-470b-b4a9-21183c508ab8"
 
 # ==============================================================================
 # 1. GROUND TRUTH CALIPER & ASSEMBLY CONSTANTS
@@ -74,14 +74,14 @@ H_HOLE_OVAL_Y = 6.45
 X_CENT = X_HOLE_CENT
 X_OVAL = X_HOLE_OVAL
 
-# Connector & Receptacle Alignment (Calibrated from physical vehicle test-fit: 5.8mm left of 27.00mm = 21.20mm)
-X_CONN = 21.20               # Collar center X
+# Connector & Receptacle Alignment (Calibrated from physical vehicle test-fit: 28mm left [cabin perspective +X] of 21.20mm = +49.20mm; 2.50mm rearward reach relief)
+X_CONN = 49.20               # Collar center X
 Z_CONN = 59.20               # Collar center Z
-X_HANDLE = 21.20             # Connector handle body & cable center X
+X_HANDLE = 49.20             # Connector handle body & cable center X
 Z_HANDLE = 62.10             # Connector handle body & cable center Z
 Y_BOX_BACK = -36.21          # Outlet box rear wall
-Y_CONN_RIM = -40.91          # Seated connector front rim ([GAP] = 4.70 mm)
-Y_SHOULDER = -95.51          # Rigid orange shoulder plane ([B7] = 54.60 mm)
+Y_CONN_RIM = -43.41          # Seated connector front rim
+Y_SHOULDER = -98.01          # Rigid orange shoulder plane (2.50 mm rearward relief)
 CABLE_D = 17.00              # Cable boot diameter (radius 8.5 mm)
 
 SHROUD_W = 36.10             # [A1] Shroud outer width
@@ -173,7 +173,7 @@ def build_base_bracket():
     m_foot_local = foot_2d.extrude(FOOT_THICK)
 
     # -------------------------------------------------------------------------
-    # B. RESMOOTHED ORGANIC MONOCOQUE RISER SPINE (REINFORCED BASE GUSSET TRANSITION)
+    # B. RESMOOTHED ORGANIC MONOCOQUE RISER SPINE (ROUTING TO X = +49.20 mm)
     # -------------------------------------------------------------------------
     def sphere_loc(x, v, z, r, segs=24):
         return m3d.Manifold.sphere(radius=r, circular_segments=segs).translate([x, v, z])
@@ -182,43 +182,39 @@ def build_base_bracket():
     s_oval_root = sphere_loc(X_OVAL + 4.0, v_oval + 11.0, 4.5, 4.5)
     s_cent_root = sphere_loc(X_CENT - 4.0, v_cent + 11.0, 4.5, 4.5)
 
-    # 2. Base Transition Gusset: Adds solid reinforcement material right before the arm slopes up (v = 49 - 52 mm, z up to 5.5 mm)
-    s_base_gusset_1 = sphere_loc(-28.0, 50.0, 5.0, 5.0)
-    s_base_gusset_2 = sphere_loc(-18.0, 51.0, 5.5, 5.5)
-    s_base_gusset_3 = sphere_loc(-8.0, 50.0, 5.0, 5.0)
-    s_base_gusset_4 = sphere_loc(-1.0, 51.0, 5.0, 5.0)
+    # 2. Stiffening base gussets connecting oval to cent bolt:
+    s_base_1 = sphere_loc(-28.0, 48.0, 4.8, 4.8)
+    s_base_2 = sphere_loc(-16.0, 48.0, 4.8, 4.8)
+    s_base_3 = sphere_loc(-4.0, 49.0, 5.0, 5.0)
+    s_base_4 = sphere_loc(X_CENT + 2.0, 50.0, 5.2, 5.0)
 
-    # 3. Resmoothed, Sleeker Riser Arm: Slimmer, continuous structural rib (r = 5.5 - 6.5 mm instead of bulky 8.5 mm)
-    s_mid_l1 = sphere_loc(-19.0, 58.0, 8.5, 5.5)
-    s_mid_m1 = sphere_loc(-11.0, 59.0, 9.0, 6.0)
-    s_mid_r1 = sphere_loc(-3.0, 58.0, 8.5, 5.5)
+    # 3. Arm rising from center bolt area toward X = 49.20 mm (staying at X <= 29.5 mm clear of connector at X >= 31.15 mm):
+    s_arm_1a = sphere_loc(6.0, 58.0, 8.5, 5.5)
+    s_arm_1b = sphere_loc(15.0, 58.0, 8.5, 5.5)
 
-    s_mid_l2 = sphere_loc(-14.0, 69.0, 13.5, 6.0)
-    s_mid_r2 = sphere_loc(-3.0, 69.0, 13.5, 6.0)
+    s_arm_2a = sphere_loc(12.0, 70.0, 14.0, 6.0)
+    s_arm_2b = sphere_loc(22.0, 70.0, 14.0, 6.0)
 
-    # 4. Upper Spine Nodes (Continuous organic rib along left flank)
-    s_spine_1l = sphere_loc(-11.0, 80.0, 18.0, 6.5)
-    s_spine_1r = sphere_loc(-1.0, 80.0, 18.0, 6.5)
+    s_arm_3a = sphere_loc(18.0, 82.0, 19.5, 6.5)
+    s_arm_3b = sphere_loc(27.0, 82.0, 19.5, 6.5)
 
-    s_spine_2l = sphere_loc(-8.0, 89.0, 22.5, 6.5)
-    s_spine_2r = sphere_loc(+1.0, 89.0, 22.5, 6.5)
+    s_arm_4a = sphere_loc(24.0, 92.0, 25.0, 6.5)
+    s_arm_4b = sphere_loc(30.0, 92.0, 25.0, 6.5)
 
-    # 5. Cradle Interface Transition Nodes (Flows into cradle centered at X = 21.20 mm)
-    s_cradle_root = sphere_loc(-4.0, 93.0, 26.5, 7.5)
-    s_cradle_l = sphere_loc(+1.0, 93.0, 26.5, 8.5)
+    # 4. Sweep behind connector shoulder (v >= 93 mm, Y <= -98.0 mm) into cradle centered at X = 49.20 mm:
+    s_cradle_trans_l = sphere_loc(36.0, 94.0, 26.5, 7.0)
+    s_cradle_trans_m = sphere_loc(43.0, 94.0, 26.5, 7.5)
+    s_cradle_trans_r = sphere_loc(X_HANDLE, 94.0, 26.5, 8.0)
 
     # Continuous Chained Hulls forming a monocoque truss:
-    h_base_shelf = (s_oval_root + s_base_gusset_1 + s_base_gusset_2 + s_base_gusset_3 + s_base_gusset_4 + s_cent_root).hull()
-    h_gusset_trans = (s_base_gusset_1 + s_base_gusset_2 + s_base_gusset_3 + s_base_gusset_4 + s_mid_l1 + s_mid_m1 + s_mid_r1).hull()
-    h_arm_oval = (s_oval_root + s_base_gusset_1 + s_mid_l1).hull()
-    h_arm_cent = (s_cent_root + s_base_gusset_4 + s_mid_r1).hull()
+    h_base = (s_oval_root + s_base_1 + s_base_2 + s_base_3 + s_base_4 + s_cent_root).hull()
+    h_takeoff = (s_base_3 + s_base_4 + s_cent_root + s_arm_1a + s_arm_1b).hull()
+    h_mid1 = (s_arm_1a + s_arm_1b + s_arm_2a + s_arm_2b).hull()
+    h_mid2 = (s_arm_2a + s_arm_2b + s_arm_3a + s_arm_3b).hull()
+    h_upper = (s_arm_3a + s_arm_3b + s_arm_4a + s_arm_4b).hull()
+    h_cradle = (s_arm_4a + s_arm_4b + s_cradle_trans_l + s_cradle_trans_m + s_cradle_trans_r).hull()
 
-    h_mid_span = (s_mid_l1 + s_mid_m1 + s_mid_r1 + s_mid_l2 + s_mid_r2).hull()
-    h_upper1 = (s_mid_l2 + s_mid_r2 + s_spine_1l + s_spine_1r).hull()
-    h_upper2 = (s_spine_1l + s_spine_1r + s_spine_2l + s_spine_2r).hull()
-    h_cradle = (s_spine_2l + s_spine_2r + s_cradle_root + s_cradle_l).hull()
-
-    spine_local = h_base_shelf + h_gusset_trans + h_arm_oval + h_arm_cent + h_mid_span + h_upper1 + h_upper2 + h_cradle
+    spine_local = h_base + h_takeoff + h_mid1 + h_mid2 + h_upper + h_cradle
 
     # Subtractions:
     # A. Guarantee 100% planar bed bottom at z_local = 0:
@@ -228,7 +224,7 @@ def build_base_bracket():
     spine_local = spine_local - sub_bottom - sub_bolt_zone
 
     bracket_local = m_foot_local + spine_local
-    bracket_world = bracket_local.transform(M_plate)
+    bracket_world = bracket_local.transform(M_plate[:3, :])
 
     # -------------------------------------------------------------------------
     # C. COMPLETELY OPEN-TOP CONNECTOR RETENTION CRADLE (NO ROOF, NO CLOSED CIRCLES)
@@ -243,15 +239,18 @@ def build_base_bracket():
     bracket = bracket_world + cradle_outer
 
     # 1. Main connector body pocket (OPEN ALL THE WAY UP THROUGH THE TOP!):
-    # Calibrated to 30.0 mm width for snug 0.50 mm lateral slip-fit around 29.0 mm connector handle (centered at X = 21.20 mm)
-    conn_pocket = m3d.Manifold.cube([30.0, 60.0, 80.0], center=True).translate([X_HANDLE, Y_SHOULDER + 30.0, 52.10 + 40.0])
+    # Calibrated to 42.0 mm width clearing connector shroud and collar at X = -6.80 mm, down to Z = 38.0 mm
+    conn_pocket = m3d.Manifold.cube([42.0, 65.0, 90.0], center=True).translate([X_HANDLE, Y_SHOULDER + 32.5, 38.0 + 45.0])
+
+    # 1b. Box Receptacle Collar Clearance (OPEN ALL THE WAY THROUGH TOP):
+    collar_pocket = m3d.Manifold.cube([26.0, 30.0, 90.0], center=True).translate([X_HANDLE, Y_BOX_BACK - 15.0, 38.0 + 45.0])
 
     # 2. Rear cable U-slot (OPEN ALL THE WAY UP THROUGH THE TOP! NO CLOSED CIRCLE!):
     # Calibrated to 20.0 mm width clearing 17.0 mm conduit and providing massive rear guide towers
-    boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 51.50 + 40.0])
+    boot_u_slot = m3d.Manifold.cube([20.0, 30.0, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER - 12.0, 38.0 + 45.0])
 
     # 3. Slide Guide Track for Keeper (OPEN THROUGH THE TOP, floor at Z = 48.0 mm):
-    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 80.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 40.0])
+    track_slot = m3d.Manifold.cube([TRACK_W, TRACK_D, 90.0], center=True).translate([X_HANDLE, Y_TRACK_CENTER, 48.0 + 45.0])
 
     # 4. Precision Female Snap Detent Pockets in Track Walls (SUBTRACTED):
     track_wall_l = X_HANDLE - TRACK_W / 2.0
@@ -264,7 +263,7 @@ def build_base_bracket():
     lead_in_l = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_l, Y_TRACK_CENTER, Z_DETENT + 4.0])
     lead_in_r = m3d.Manifold.cylinder(radius_low=0.8, radius_high=0.8, height=22.0, circular_segments=16).translate([track_wall_r, Y_TRACK_CENTER, Z_DETENT + 4.0])
 
-    bracket = bracket - conn_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
+    bracket = bracket - conn_pocket - collar_pocket - boot_u_slot - track_slot - detent_pocket_l - detent_pocket_r - lead_in_l - lead_in_r
 
     # -------------------------------------------------------------------------
     # D. SUBTRACT ENCLOSED M6 THROUGH-HOLES & VERTICAL TOOL ACCESS

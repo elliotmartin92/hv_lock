@@ -20,7 +20,7 @@ from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
 accurate_models_dir = os.path.join(os.path.dirname(target_dir), "accurate_models")
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\9d06c7e1-2a89-470b-b4a9-21183c508ab8"
 
 print("Loading CAD meshes for technical blueprint generation...")
 h_mesh = trimesh.load(os.path.join(accurate_models_dir, "mated_outer_housing.stl"))
@@ -107,8 +107,8 @@ ax1.set_xlabel("Screen Width (mm: Left = Driver/Connector, Right = Passenger/Out
 ax1.set_ylabel("Height Z (mm: Chin Tip = 0.0, Roof Rim = 95.40)", color='#94a3b8', fontsize=8.5)
 
 draw_dim(ax1, (-71.15, 95.40), (71.15, 95.40), "[H1] Total Width: 142.30 mm", offset=(0, 10), color='#facc15', fontsize=8.0)
-draw_dim(ax1, (-21.20 - 15.0, 50.0), (-21.20 + 15.0, 50.0), "Cradle Pocket: 30.0 mm (Centered X = 21.20 mm)", offset=(0, -14), color='#f97316', fontsize=7.2)
-draw_dim(ax1, (-21.20 - 9.5, 73.0), (-21.20 + 9.5, 73.0), "Keeper Throat: 19.0 mm (2x 8.55mm Shoulders)", offset=(0, 14), color='#4ade80', fontsize=7.2)
+draw_dim(ax1, (-49.20 - 18.3, 50.0), (-49.20 + 18.3, 50.0), "Cradle Pocket: 36.6 mm (Centered X = +49.20 mm)", offset=(0, -14), color='#f97316', fontsize=7.2)
+draw_dim(ax1, (-49.20 - 9.5, 73.0), (-49.20 + 9.5, 73.0), "Keeper Throat: 19.0 mm (2x 8.55mm Shoulders)", offset=(0, 14), color='#4ade80', fontsize=7.2)
 
 ax1.text(-50, 110, "SCREEN LEFT: CONNECTOR & LOCK V2", color='#38bdf8', fontsize=8.5, weight='bold', ha='center')
 ax1.text(50, 110, "SCREEN RIGHT: AC 120V OUTLET", color='#94a3b8', fontsize=8.5, weight='bold', ha='center')
@@ -118,7 +118,7 @@ ax1.text(50, 110, "SCREEN RIGHT: AC 120V OUTLET", color='#94a3b8', fontsize=8.5,
 # ==============================================================================
 ax2 = fig.add_subplot(2, 2, 2)
 create_card(ax2, "PANEL 2: SIDE PROFILE & 100% FLAT BOLT FLANGE (Y-Z)",
-            "Depth Profile • Flat Flange (2.80 mm) Across Bolts • Locked at Y = -95.51 mm")
+            "Depth Profile • Flat Flange (2.80 mm) Across Bolts • Locked at Y = -98.01 mm")
 
 ax2.tripcolor(h_mesh.vertices[:, 1], h_mesh.vertices[:, 2], h_mesh.faces, facecolors=np.ones(len(h_mesh.faces)), cmap='Blues', alpha=0.25, edgecolors='#1e293b', lw=0.15)
 ax2.tripcolor(b_mesh.vertices[:, 1], b_mesh.vertices[:, 2], b_mesh.faces, facecolors=np.ones(len(b_mesh.faces)), cmap='Greys', alpha=0.50, edgecolors='#0f172a', lw=0.2)
@@ -135,8 +135,8 @@ ax2.set_ylabel("Height Z (mm)", color='#94a3b8', fontsize=8.5)
 draw_dim(ax2, (0.0, 95.40), (-58.80, 95.40), "[H7a] Wing Depth: 58.80 mm", offset=(0, 10), color='#facc15', fontsize=8.0)
 draw_dim(ax2, (0.0, 27.10), (-53.00, 27.10), "[H10] Aluminum Extension: 53.00 mm", offset=(0, -16), color='#38bdf8', fontsize=7.5)
 draw_dim(ax2, (-36.21, 59.20), (-40.91, 59.20), "[GAP] Seated Gap: 4.70 mm", offset=(0, 18), color='#f43f5e', fontsize=7.5)
-draw_dim(ax2, (-40.91, 75.00), (-95.51, 75.00), "[B7] Rigid Length: 54.60 mm", offset=(0, 6), color='#f97316', fontsize=8.0)
-draw_dim(ax2, (-95.51, 88.0), (-103.71, 88.0), "Keeper: 8.2 mm (Open U-Fork)", offset=(0, 0), color='#22c55e', fontsize=7.0)
+draw_dim(ax2, (-40.91, 75.00), (-98.01, 75.00), "[B7] Rigid Length: 57.10 mm", offset=(0, 6), color='#f97316', fontsize=8.0)
+draw_dim(ax2, (-98.01, 88.0), (-106.21, 88.0), "Keeper: 8.2 mm (Open U-Fork)", offset=(0, 0), color='#22c55e', fontsize=7.0)
 
 # Callout for extended toe under box
 draw_dim(ax2, (-36.21, 30.0), (-28.00, 30.0), "Toe Under Box: 8.21 mm", offset=(0, -10), color='#4ade80', fontsize=7.5)
@@ -147,8 +147,8 @@ ax2.annotate("FLAT BOLT FLANGE (Z = 2.80 mm)\n100% Flat Starting at Bolt Depress
              color='#facc15', fontsize=8.0, weight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#facc15', lw=1.2))
 
-ax2.annotate("LOCKED SHOULDER PLANE (Y = -95.51 mm)\nZero Axial Pullout Possible!\nKeeper Inverted U-Fork Drops from Above",
-             xy=(-95.51, 59.2), xytext=(-155.0, 42.0),
+ax2.annotate("LOCKED SHOULDER PLANE (Y = -98.01 mm)\nZero Axial Pullout Possible!\nKeeper Inverted U-Fork Drops from Above",
+             xy=(-98.01, 59.2), xytext=(-155.0, 42.0),
              arrowprops=dict(arrowstyle="->", color='#22c55e', lw=1.8),
              color='#22c55e', fontsize=8.0, weight='bold',
              bbox=dict(boxstyle='round,pad=0.3', facecolor='#0b1329', edgecolor='#22c55e', lw=1.2))
@@ -172,21 +172,21 @@ c2 = plt.Circle((-39.625, -42.59), 18.50/2.0, color='#facc15', fill=False, lw=1.
 ax3.add_patch(c1)
 ax3.add_patch(c2)
 
-# Mark snap detent coordinates (centered at X = 21.20 mm)
-ax3.plot([-2.10], [-99.61], 'o', color='#4ade80', markersize=6)
-ax3.plot([44.50], [-99.61], 'o', color='#4ade80', markersize=6)
-ax3.text(21.20, -114.0, "Precision Snap Detents (X = -2.10 & 44.50 mm, Y = -99.61 mm)\nTrack Female Pocket (R = 2.2 mm) + Keeper Male Bump (R = 1.8 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
+# Mark snap detent coordinates (centered at X = +49.20 mm)
+ax3.plot([30.90], [-102.11], 'o', color='#4ade80', markersize=6)
+ax3.plot([67.50], [-102.11], 'o', color='#4ade80', markersize=6)
+ax3.text(49.20, -116.0, "Precision Snap Detents (X = 30.90 & 67.50 mm, Y = -102.11 mm)\nTrack Female Pocket (R = 2.3 mm) + Keeper Male Bump (R = 2.0 mm)", color='#4ade80', fontsize=7.2, ha='center', weight='bold')
 
 ax3.set_xlim(-95, 95)
 ax3.set_ylim(-190, 25)
 ax3.set_aspect('equal')
-ax3.set_xlabel("Horizontal Span (mm: Left = Connector & Lock v2, Right = Outlet)", color='#94a3b8', fontsize=8.5)
+ax3.set_xlabel("Horizontal Span (mm: +X Right = Connector & Lock v2, -X Left = Outlet)", color='#94a3b8', fontsize=8.5)
 ax3.set_ylabel("Depth Y (mm: -Y = Rearward, +Y = Forward)", color='#94a3b8', fontsize=8.5)
 
 draw_dim(ax3, (-70.25, -45.0), (70.25, -45.0), "[H11] Inner Wing Span: 140.50 mm", offset=(0, 28), color='#facc15', fontsize=8.0)
 draw_dim(ax3, (-60.10, -50.0), (60.10, -50.0), "[H12] Plate Width: 120.20 mm", offset=(0, -10), color='#38bdf8', fontsize=8.0)
-draw_dim(ax3, (-5.275, -42.29), (39.625, -42.59), "Dual M6 Spacing: 44.90 mm", offset=(0, 8), color='#4ade80', fontsize=8.0)
-draw_dim(ax3, (-4.80, -95.51), (47.20, -95.51), "Rear Cradle: 52.0 mm", offset=(0, -12), color='#38bdf8', fontsize=7.5)
+draw_dim(ax3, (-39.625, -42.59), (5.275, -42.29), "Dual M6 Spacing: 44.90 mm", offset=(0, 8), color='#4ade80', fontsize=8.0)
+draw_dim(ax3, (49.20 - 26.0, -102.11), (49.20 + 26.0, -102.11), "Rear Cradle: 52.0 mm", offset=(0, -14), color='#38bdf8', fontsize=7.5)
 
 ax3.annotate("Extended Clamping Toe\n(Under Box to Y = -28 mm)", xy=(-15.0, -28.0), xytext=(-55.0, -15.0),
              arrowprops=dict(arrowstyle="->", color='#4ade80', lw=1.2),

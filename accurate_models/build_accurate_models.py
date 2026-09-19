@@ -24,7 +24,7 @@ import shapely.geometry as sg
 from shapely.ops import unary_union
 
 target_dir = os.path.dirname(os.path.abspath(__file__))
-artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\99b3c651-87a6-4b23-93cf-ec6e4fc6bc2f"
+artifact_dir = r"C:\Users\Elliot\.gemini\antigravity\brain\9d06c7e1-2a89-470b-b4a9-21183c508ab8"
 
 def create_box(extents, translation=[0, 0, 0]):
     m = trimesh.creation.box(extents=extents)
@@ -448,8 +448,8 @@ def build_mated_assembly():
         s.visual.vertex_colors = [2, 6, 23, 255]
 
     # 3. RECEPTACLE COLLAR AT REAR OF BOX (Extending from Y = -36.21 mm along -Y)
-    # Placed on LEFT side of box (+X) behind the flap door (calibrated to X = 21.20 mm)
-    collar_x = 21.20
+    # Placed behind the flap door (calibrated 28.0 mm left [cabin perspective +X] of 21.20 mm: X = +49.20 mm)
+    collar_x = 49.20
     collar_w = 22.70 # [D1]
     collar_h = 33.05 # [D2]
     collar_len = 22.37 # [C1]

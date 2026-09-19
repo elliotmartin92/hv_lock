@@ -18,34 +18,34 @@ In direct response to mechanical fatigue, installation ergonomics, and physical 
 2. **Heavy-Duty Slide-In Retention Keeper (100% Open Inverted U-Fork • Genus = 0)**:
    - **Zero Closed Holes**: The keeper is a **100% open-bottom inverted U-fork** (\(\text{Genus} = 0\)). The bottom of the keeper is completely wide open with zero bottom bridge or floor.
    - **Drop-In Assembly**: Neither the connector head nor the cable needs to be threaded through any closed hole. Once the orange connector and cable drop into the open-top base bracket saddle, the keeper drops straight down over the cable boot from above.
-   - **Robust Thickness**: **\(8.2\text{ mm}\) solid PCTG thickness** with an integrated **\(36.0\text{ mm}\) wide** ergonomic thumb grip tab.
-   - **Calibrated Cable Throat**: Features a **\(19.0\text{ mm}\) wide inverted U-slot** centered at \(X = 21.20\text{ mm}\) that clears the \(\varnothing 17.0\text{ mm}\) corrugated conduit with \(+1.0\text{ mm}\) radial air gap and \(0.000000\text{ mm}^3\) collision volume.
-   - **Bilateral 8.55 mm Bearing Shoulders (1.000 Symmetry Ratio)**:
-     * Left Shoulder: Bears against connector shoulder from \(X = 3.15\text{ mm}\) to \(11.70\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
-     * Right Shoulder: Bears against connector shoulder from \(X = 30.70\text{ mm}\) to \(39.25\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
-     * Symmetrical Bearing Area: **\(\sim 325\text{ mm}^2\)** of solid PCTG bearing squarely against the rigid orange shoulder plane at \(Y = -95.51\text{ mm}\), preventing any axial pullout or cocking.
-   - **Precision Aligned Snap Detents**:
-     * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.2\text{ mm}\)) subtracted directly into the track side walls at \(X = -2.10\text{ mm}\) and \(X = 44.50\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\), with vertical lead-in guide channels.
-     * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 1.8\text{ mm}\)) protruding from the lateral side edges at \(X = -1.70\text{ mm}\) and \(X = 44.10\text{ mm}\), \(Y = -99.61\text{ mm}\), \(Z = 56.00\text{ mm}\).
-     * **0.000 mm Alignment Error**: The detents line up identically in \(Y\) and \(Z\), sliding down smoothly and snapping together with a tactile "CLICK" that prevents vibration walkout.
-   - **Toolless Release**: Simply pull straight up on the thumb tab to release the keeper for vehicle servicing.
+    - **Robust Thickness**: **\(8.2\text{ mm}\) solid PCTG thickness** with an integrated **\(36.0\text{ mm}\) wide** ergonomic thumb grip tab.
+    - **Calibrated Cable Throat**: Features a **\(19.0\text{ mm}\) wide inverted U-slot** centered at **\(X = +49.20\text{ mm}\)** that clears the \(\varnothing 17.0\text{ mm}\) corrugated conduit with \(+1.0\text{ mm}\) radial air gap and \(0.000000\text{ mm}^3\) collision volume.
+    - **Bilateral 8.55 mm Bearing Shoulders (1.000 Symmetry Ratio)**:
+      * Left Shoulder: Bears against connector shoulder from \(X = 31.15\text{ mm}\) to \(39.70\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
+      * Right Shoulder: Bears against connector shoulder from \(X = 58.70\text{ mm}\) to \(67.25\text{ mm}\) (\(8.55\text{ mm}\) solid contact).
+      * Symmetrical Bearing Area: **\(\sim 325\text{ mm}^2\)** of solid PCTG bearing squarely against the rigid orange shoulder plane at **\(Y = -98.01\text{ mm}\)** (\(2.50\text{ mm}\) rearward relief easing cable bend tension), preventing any axial pullout or cocking.
+    - **Precision Aligned Snap Detents**:
+      * **Base Track Pockets (Female)**: Precision spherical pockets (\(R = 2.3\text{ mm}\)) subtracted directly into the track side walls at \(X = 30.90\text{ mm}\) and \(X = 67.50\text{ mm}\), \(Y = -102.11\text{ mm}\), \(Z = 58.00\text{ mm}\), with vertical lead-in guide channels.
+      * **Keeper Bumps (Male)**: Symmetrical spherical bumps (\(R = 2.0\text{ mm}\)) protruding from the lateral side edges at \(X = 30.90\text{ mm}\) and \(X = 67.50\text{ mm}\), \(Y = -102.11\text{ mm}\), \(Z = 58.00\text{ mm}\).
+      * **0.000 mm Alignment Error**: The detents line up identically in \(Y\) and \(Z\), sliding down smoothly and snapping together with a tactile "CLICK" that prevents vibration walkout.
+    - **Toolless Release**: Simply pull straight up on the thumb tab to release the keeper for vehicle servicing.
 
 3. **Accommodates OEM M6 Flanged Nuts with Built-In \(\varnothing 17.25\text{ mm}\) Washers**:
-   - Flat flange seats allow OEM flanged nuts with their integrated \(\varnothing 17.25\text{ mm}\) washer to seat completely flush without edge binding.
-   - Enclosed through-holes (\(\varnothing 7.20\text{ mm}\) Central / \(8.00 \times 7.20\text{ mm}\) Outer Slot) clamp the lock rigidly to the vehicle frame.
-   - Unimpeded vertical socket tool clearance cylinders (\(\varnothing 18.50\text{ mm}\)) extend normal to the plate through the top of the bracket for direct access with a standard \(10\text{ mm}\) socket wrench.
+    - Flat flange seats allow OEM flanged nuts with their integrated \(\varnothing 17.25\text{ mm}\) washer to seat completely flush without edge binding.
+    - Enclosed through-holes (\(\varnothing 7.20\text{ mm}\) Central / \(8.00 \times 7.20\text{ mm}\) Outer Slot) clamp the lock rigidly to the vehicle frame.
+    - Unimpeded vertical socket tool clearance cylinders (\(\varnothing 18.50\text{ mm}\)) extend normal to the plate through the top of the bracket for direct access with a standard \(10\text{ mm}\) socket wrench.
 
 4. **Extended Clamping Toe Underneath the Outlet Box**:
-   - Because the nut's \(\varnothing 17.25\text{ mm}\) built-in washer reaches \(Y = -33.66\text{ mm}\) (\(2.55\text{ mm}\) forward of the outlet box rear wall at \(Y = -36.21\text{ mm}\)), the mounting foot extends forward to **\(Y = -28.00\text{ mm}\)** (\(8.21\text{ mm}\) underneath the outlet box).
-   - Provides **\(5.66\text{ mm}\) of solid PCTG bearing material ahead of the washer rim**, supporting the primary forward compressive reaction load.
-   - The foot thickness under the box is calibrated to \(2.80\text{ mm}\), leaving a verified **\(2.04\text{ mm}\) vertical air gap** below the flat underside of the outlet box (\(Z = 36.20\text{ mm}\)).
-   - Acts as a continuous cantilever lever arm that prevents bracket tipping and transfers compressive clamping reaction directly into the vehicle floor plate.
+    - Because the nut's \(\varnothing 17.25\text{ mm}\) built-in washer reaches \(Y = -33.66\text{ mm}\) (\(2.55\text{ mm}\) forward of the outlet box rear wall at \(Y = -36.21\text{ mm}\)), the mounting foot extends forward to **\(Y = -28.00\text{ mm}\)** (\(8.21\text{ mm}\) underneath the outlet box).
+    - Provides **\(5.66\text{ mm}\) of solid PCTG bearing material ahead of the washer rim**, supporting the primary forward compressive reaction load.
+    - The foot thickness under the box is calibrated to \(2.80\text{ mm}\), leaving a verified **\(2.04\text{ mm}\) vertical air gap** below the flat underside of the outlet box (\(Z = 36.20\text{ mm}\)).
+    - Acts as a continuous cantilever lever arm that prevents bracket tipping and transfers compressive clamping reaction directly into the vehicle floor plate.
 
-5. **100% Flat Bolt Flange (Zero Plate Interference) & Vehicle Fit-Check Calibration**:
-   - **Eliminates Raised Turrets & Deep Sockets**: The bolt interface is **100% flat and planar** at \(Z_{\text{local}} = 2.80\text{ mm}\) starting at the bolt depressions. All raised 8.50 mm bosses, counterbore walls, and inter-bolt deck have been eliminated to provide zero interference with the vehicle's stamped aluminum floor plate.
-   - **Spine Foundation Setback**: The Wishbone riser backbone nodes are positioned strictly **behind the bolt depressions** (at \(v \ge 47.0\text{ mm}\), \(Y \le -52.0\text{ mm}\)), behind the rear edge of the aluminum plate (\(Y = -53.00\text{ mm}\)).
-   - **Calibrated 5.8 mm Offset Realignment**: The opening, cradle, guide tracks, and keeper are realigned from physical vehicle test-fitting: shifted **\(5.8\text{ mm}\) to the left** (facing windshield) from the previous large opening design (\(X = 27.00\text{ mm} \to \mathbf{X = 21.20\text{ mm}\)), perfectly centering the retention cradle over the vehicle's connector and conduit.
-   - **Solid PCTG Volume**: Bracket maintains full structural monocoque integrity while providing strictly **\(0.000000\text{ mm}^3\) collision volume** across Outer Housing, Outlet Box, and Connector.
+5. **100% Flat Bolt Flange & Continuous Corridor Riser Spine Routing**:
+    - **Eliminates Raised Turrets & Deep Sockets**: The bolt interface is **100% flat and planar** at \(Z_{\text{local}} = 2.80\text{ mm}\) starting at the bolt depressions. All raised bosses and counterbore walls have been eliminated to provide zero interference with the vehicle's stamped aluminum floor plate.
+    - **Corridor Riser Spine Routing**: The continuous monocoque spine takes off from the center bolt zone and ascends cleanly through the clear corridor (\(X \in [6.0, 30.0]\text{ mm}\)) between the center bolt washer and the connector body (\(X \ge 31.15\text{ mm}\)), sweeping into the cradle behind the shoulder (\(Y \le -98.01\text{ mm}\)). This delivers strictly **\(0.000000\text{ mm}^3\) collision volume** across Outer Housing, Outlet Box, and Connector.
+    - **Calibrated 28.0 mm Offset Realignment**: Realigned from physical vehicle test-fitting: shifted **\(28.00\text{ mm}\) cabin left** (\(X = 21.20\text{ mm} \to \mathbf{X = +49.20\text{ mm}\)), perfectly coaxial with the vehicle connector and eliminating lateral cable bending strain.
+    - **2.50 mm Fore-Aft Reach Relief**: The retention shoulder plane is eased rearward from \(Y = -95.51\text{ mm}\) to **\(Y = -98.01\text{ mm}\)**, providing reach relief to eliminate excessive cable boot compression.
 
 ```text
                VEHICLE INTERIOR (+Y)
@@ -98,10 +98,10 @@ All geometry strictly references [`accurate_models/README_AI.md`](file:///c:/Use
 | **Dual Bolt Center Span `[H15e]`**| **\(44.90\text{ mm}\)** | **\(44.90\text{ mm}\)** exact spacing (\(0.00\text{ mm}\) center offset) | Direct chassis anchoring |
 | **Aluminum Plate Angle `[H16c]`** | **\(5.87^\circ\)** upward pitch | **\(5.87^\circ\)** matched base foot pitch | 100% flush bearing contact |
 | **Connector Seated Gap `[GAP]`** | \(4.70\text{ mm}\) clearance | Leaves \(4.70\text{ mm}\) undisturbed | Factory seal compression maintained |
-| **Connector Rigid Length `[B7]`**| \(54.60\text{ mm}\) | Shoulder plane locked at **\(Y = -95.51\text{ mm}\)** | Positive mechanical axial stop |
+| **Connector Rigid Length `[B7]`**| \(54.60\text{ mm}\) | Shoulder plane locked at **\(Y = -98.01\text{ mm}\)** (\(2.50\text{ mm}\) reach relief) | Positive mechanical axial stop |
 | **Shoulder Bearing Overlap** | None (loose in prototype) | **2x \(8.55\text{ mm}\) Bilateral Shoulders** (\(\sim 325\text{ mm}^2\)) | Symmetrical balanced axial retention |
 | **Bilateral Symmetry Ratio** | Asymmetric in early build | **1.000 (Exact 50/50 load sharing)** | Eliminates cantilever yaw / twisting |
-| **Cradle Centerline** | \(X = 27.00\text{ mm}\) (early design) | **\(X = 21.20\text{ mm}\)** (\(5.8\text{ mm}\) left calibration) | Directly concentric with vehicle connector |
+| **Cradle Centerline** | \(X = 21.20\text{ mm}\) (early test-fit) | **\(X = +49.20\text{ mm}\)** (\(28.00\text{ mm}\) cabin left calibration) | Directly coaxial with vehicle connector |
 | **Bolt Mounting Interface** | Raised \(8.5\text{ mm}\) turrets | **100% Flat Flange (\(2.80\text{ mm}\))** starting at bolt depressions | Zero interference with aluminum plate |
 | **Cradle Guide Channel** | \(38.5\text{ mm}\) wide (\(9.5\text{ mm}\) slop) | **\(30.0\text{ mm}\) Snug Channel** (\(0.50\text{ mm}\) slip-fit) | Prevents side-to-side wiggle and rattle |
 | **Cable Boot Clearance** | \(\varnothing 17.00\text{ mm}\) rubber boot | \(\varnothing 19.00\text{ mm}\) U-slot (\(1.0\text{ mm}\) radial air gap) | Smooth lead-in, zero cable chafing |
